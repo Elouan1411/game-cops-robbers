@@ -82,6 +82,7 @@ bool board_read_from (board *self, FILE *file)
         {
           return false;
         }
+      // Appeler deux fois pour faire dans les deux sens
       board_add_edge_uni (self->vertices[v1], self->vertices[v2]);
       board_add_edge_uni (self->vertices[v2], self->vertices[v1]);
     }
