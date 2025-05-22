@@ -203,8 +203,8 @@ static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
 	/* Poids (peut etre a ajuster) */
 	const int W_DIST_MAX =
 		7; // distance_maximale (Éloignement des autres gendarmes déjà placés)
-	const int W_DEGREE = 0;	  // mobilité
-	const int W_DIST_MOY = 0; // Moyenne des distances vers tous les sommets
+	const int W_DEGREE = 3;	  // mobilité
+	const int W_DIST_MOY = 2; // Moyenne des distances vers tous les sommets
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
