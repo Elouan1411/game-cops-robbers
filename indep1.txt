@@ -1,0 +1,8 @@
+Cops: 3
+Robbers: 3
+Max turn: 6
+Vertices: 3
+1.000 0.000
+-0.500 0.866
+-0.500 -0.866
+Edges: 0

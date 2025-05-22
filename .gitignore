@@ -1,0 +1,16 @@
+# Ignore les fichiers d'objet et les fichiers exécutables
+*.o
+*.out
+*.exe
+
+# Ignore les fichiers générés par l'éditeur
+*~
+
+# Ignore les fichiers de compilation
+*.dSYM/
+
+# Ignore les fichiers de dépendances générés
+*.dep
+
+# Ignore les fichiers de sauvegarde
+*.bak
