@@ -7,8 +7,8 @@ shopt -s nullglob
 ############################
 # Paramètres faciles à éditer
 ############################
-opponents=(low mid)              # autres binaires
-runs=5                          # nombre d’itérations
+opponents=(bin/low bin/mid)              # autres binaires
+runs=2                          # nombre d’itérations
 game=./game                      # ton programme
 python_cmd=python3               # ou python
 verbose=false                    # mode verbeux
@@ -22,7 +22,7 @@ for arg in "$@"; do
   esac
 done
 
-inputs=( *.txt )
+inputs=( test_file/*.txt )
 [ ${#inputs[@]} -eq 0 ] && { echo "Aucun .txt trouvé"; exit 1; }
 
 # Associatifs : victoires de ./game
