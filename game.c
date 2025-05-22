@@ -21,8 +21,9 @@ static void place_robbers(board *b, board_vertex **out_pos, size_t k,
 static int dist_moy_between_summit_and_all_cops(board *b, board_vertex *v,
 												board_vertex **cops,
 												size_t ncops);
-static int check_if_one_robber_on_summit(board_vertex *v, board_vertex **robber,
-										 size_t nrobber);
+static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
+										 board_vertex **cops, size_t ncops);
+static int dist_moy_between_summit_and_all_summits(board *b, board_vertex *v);
 
 // Structure pour stocker une valeur et son indice
 typedef struct {
@@ -139,25 +140,55 @@ void game_update_position(game *self, size_t *new) {
 }
 
 /* ---------------------------------------------------------------------
- *  Dispersion maximale : choisir k sommets mutuellement éloignés
- *  b          : pointeur vers le plateau (board déjà initialisé)
- *  out_pos[]  : tableau (déjà alloué) qui recevra les k positions
- *  k          : nombre de gendarmes à placer
+ *  Dispersion maximale : choisir k sommets mutuellement éloignés (mais en
+ * stratégie gloutonne)
+ * b          : pointeur vers le plateau (board déjà initialisé)
+ * out_pos[]  : tableau (déjà alloué) qui recevra les k positions
+ * k : nombre de gendarmes à placer
  * -------------------------------------------------------------------*/
-static void place_cops(board *b, board_vertex **out_pos, size_t k) {}
+static void place_cops(board *b, board_vertex **out_pos, size_t k) {
+	if (!b->dist)
+		board_Floyd_Warshall(b);
 
+	// Tableau pour suivre les sommets déjà sélectionnés
+	bool *selected = calloc(b->size, sizeof(bool));
+
+	for (size_t i = 0; i < k; i++) {
+		int best_score = INT_MIN;
+		int best_idx = -1;
+
+		for (size_t j = 0; j < b->size; j++) {
+			if (selected[j])
+				continue;
+
+			int score =
+				score_pos_cops_for_one_summit(b, b->vertices[j], out_pos, i);
+			if (score > best_score) {
+				best_score = score;
+				best_idx = j;
+			}
+		}
+
+		if (best_idx != -1) {
+			out_pos[i] = b->vertices[best_idx];
+			selected[best_idx] = true;
+		}
+	}
+	free(selected);
+}
+// TODO: faire une seule fonction pour les deux
 static void place_robbers(board *b, board_vertex **out_pos, size_t k,
 						  board_vertex **cops, size_t ncops) {
 	/* -- 1) S’assurer que l’on dispose des distances -- */
 	if (!b->dist)				 /* dist==NULL → pas encore calculé  */
 		board_Floyd_Warshall(b); /* calcule dist[][] et next[][]     */
-								 /* Faire le score sur chaque sommet */
+
 	int *scores = calloc(b->size, sizeof(int));
 	for (size_t i = 0; i < b->size; i++) {
 		scores[i] =
 			score_pos_robber_for_one_summit(b, b->vertices[i], cops, ncops);
 	}
-	/* et garder les k meilleurs (k=nrobber) */
+	/* et garder les k meilleurs*/
 	int *index_best = top_k_indices(scores, b->size, k);
 	// remplir le tableau de sortie
 	for (size_t i = 0; i < k; i++) {
@@ -165,6 +196,25 @@ static void place_robbers(board *b, board_vertex **out_pos, size_t k,
 	}
 	free(index_best);
 	free(scores);
+}
+
+static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
+										 board_vertex **cops, size_t ncops) {
+	/* Poids (peut etre a ajuster) */
+	const int W_DIST_MAX =
+		7; // distance_maximale (Éloignement des autres gendarmes déjà placés)
+	const int W_DEGREE = 0;	  // mobilité
+	const int W_DIST_MOY = 0; // Moyenne des distances vers tous les sommets
+
+	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
+	int degree = v->degree;
+	int dist_moy = dist_moy_between_summit_and_all_summits(b, v);
+
+	/* Score pondéré */
+	int score =
+		W_DIST_MAX * dist_min + W_DEGREE * degree - W_DIST_MOY * dist_moy;
+
+	return score;
 }
 
 /* ---------------------------------------------------------------------
@@ -176,45 +226,27 @@ static void place_robbers(board *b, board_vertex **out_pos, size_t k,
  * -------------------------------------------------------------------*/
 static int score_pos_robber_for_one_summit(board *b, board_vertex *v,
 										   board_vertex **cops, size_t ncops) {
-	/* -- 1) S’assurer que l’on dispose des distances -- */
-	if (!b->dist)				 /* dist==NULL → pas encore calculé  */
-		board_Floyd_Warshall(b); /* calcule dist[][] et next[][]     */
-
-	int score = 0;
 	/* Poids (peut etre a ajuster) */
 	const int W_DIST_MIN = 5; // distance minimale (le plus important)
 	const int W_DEGREE = 2;	  // mobilité / échappatoires
 	const int W_DIST_MOY = 1; // distance moyenne (utile si plusieurs gendarmes)
-	const int PENALTY_DUPLICATE_POS = 1000; // pénalité si même sommet
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
 	int dist_moy = dist_moy_between_summit_and_all_cops(b, v, cops, ncops);
-	int is_robber_on_summit = check_if_one_robber_on_summit(
-		v, cops, ncops); // TODO: modifier pour qu'il y est plus de dispertion
-
 	/* Score pondéré */
-	score += W_DIST_MIN * dist_min;
-	score += W_DEGREE * degree;
-	score += W_DIST_MOY * dist_moy;
-	score -= PENALTY_DUPLICATE_POS * is_robber_on_summit;
+	int score =
+		W_DIST_MIN * dist_min + W_DEGREE * degree + W_DIST_MOY * dist_moy;
 
 	return score;
-}
-
-static int check_if_one_robber_on_summit(board_vertex *v, board_vertex **robber,
-										 size_t nrobber) {
-	for (size_t j = 0; j < nrobber; j++) {
-		if (v == robber[j]) {
-			return 1;
-		}
-	}
-	return 0;
 }
 
 static int min_dist_between_summit_and_all_cops(board *b, board_vertex *v,
 												board_vertex **cops,
 												size_t ncops) {
+	if (ncops == 0) {
+		return INT_MAX;
+	}
 	int min_dist = INT_MAX;
 	for (size_t j = 0; j < ncops; j++) {
 		int d = b->dist[v->index][cops[j]->index];
@@ -223,6 +255,10 @@ static int min_dist_between_summit_and_all_cops(board *b, board_vertex *v,
 		}
 	}
 	return min_dist;
+}
+
+static int dist_moy_between_summit_and_all_summits(board *b, board_vertex *v) {
+	return dist_moy_between_summit_and_all_cops(b, v, b->vertices, b->size);
 }
 
 static int dist_moy_between_summit_and_all_cops(board *b, board_vertex *v,
