@@ -8,18 +8,33 @@ shopt -s nullglob
 # Paramètres faciles à éditer
 ############################
 opponents=(bin/low bin/mid)              # autres binaires
-runs=2                          # nombre d’itérations
+runs=3                          # nombre d’itérations
 game=./game                      # ton programme
 python_cmd=python3               # ou python
 verbose=false                    # mode verbeux
 ############################
 
 # Gestion de l'option verbose
-for arg in "$@"; do
+
+args=("$@")  # convertit en tableau pour accéder avec un index
+
+i=0
+while [ $i -lt $# ]; do
+  arg="${args[$i]}"
   case "$arg" in
-    -v|--verbose) verbose=true ;;
-    *) echo "Usage: $0 [-v]"; exit 1 ;;
+    -v|--verbose)
+      verbose=true
+      ;;
+    -n|--number)
+      i=$((i + 1))
+      runs="${args[$i]}"
+      ;;
+    *)
+      echo "Usage: $0 [-v] [-n number]"
+      exit 1
+      ;;
   esac
+  i=$((i + 1))
 done
 
 inputs=( test_file/*.txt )

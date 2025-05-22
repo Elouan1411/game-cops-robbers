@@ -100,6 +100,49 @@ void game_update_position (game *self, size_t *new)
 }
 
 /*
+ * Déplacacement des voleurs
+ * On parcourt tous les voisins d’un voleur.
+ * Pour chaque voisin, on regarde la distance minimale à tous les gendarmes.
+ * On choisit le voisin le plus éloigné des gendarmes (selon la distance
+minimale la plus grande).
+*/
+board_vertex *choose_best_escape_vertex (board *b, board_vertex *current_pos,
+                                         const board_vertex **cop_positions,
+                                         size_t cop_count)
+{
+  if (!b || !current_pos || !cop_positions || cop_count == 0)
+    return current_pos;
+
+  board_vertex *best = current_pos;
+  int max_min_dist = -1;
+
+  // Parcourir les voisins du voleur
+  for (size_t i = 0; i < current_pos->degree; i++)
+    {
+      board_vertex *neighbor = current_pos->neighbors[i];
+      int min_dist_to_cop = INT_MAX;
+
+      // Pour chaque gendarme, on regarde la distance entre ce voisin et lui
+      for (size_t j = 0; j < cop_count; j++)
+        {
+          size_t cop_index = cop_positions[j]->index;
+          int dist = b->dist[neighbor->index][cop_index];
+          if (dist < min_dist_to_cop)
+            min_dist_to_cop = dist;
+        }
+
+      // On garde le voisin qui maximise la distance minimale au gendarme
+      if (min_dist_to_cop > max_min_dist)
+        {
+          max_min_dist = min_dist_to_cop;
+          best = neighbor;
+        }
+    }
+
+  return best;
+}
+
+/*
  * Return the initial or next positions of either the cops or the
  * robbers
  */
@@ -130,15 +173,17 @@ vector *game_next_position (game *self)
         if (self->r == COPS)
           {                     // deplacement des gendarmes
             current->positions[i] =
-              self->b.vertices[board_next
-                               (&(self->b), current->positions[i]->index,
-                                self->b.size - i - 1)];
+              self->b.
+              vertices[board_next
+                       (&(self->b), current->positions[i]->index,
+                        self->b.size - i - 1)];
           }
         else
           {                     // deplacement des voleurs
             current->positions[i] =
-              self->b.vertices[board_next
-                               (&(self->b), current->positions[i]->index, i)];
+              choose_best_escape_vertex (&(self->b), current->positions[i],
+                                         (const board_vertex **) self->cops.
+                                         positions, self->cops.size);
           }
       }
   return current;
