@@ -65,6 +65,7 @@ echo "Tests : ${#opponents[@]} adversaires × ${#inputs[@]} fichiers × $runs×2
 
 total_runs=$(( ${#opponents[@]} * ${#inputs[@]} * 2 * runs ))
 current_run=0
+error=0
 
 for txt in "${inputs[@]}"; do
   for opp in "${opponents[@]}"; do
@@ -77,6 +78,9 @@ for txt in "${inputs[@]}"; do
           emoji="✅"
         else
           emoji="❌"
+          if [[ "${res,,}" == *"cops win!"*  ]]; then
+            ((error++))
+          fi
         fi
         echo "[map: $txt] $opp VS ./game $emoji (run $current_run/$total_runs)"
       fi
@@ -94,6 +98,9 @@ for txt in "${inputs[@]}"; do
           emoji="✅"
         else
           emoji="❌"
+            if [[ "${res,,}" == *"robbert win!"*  ]]; then
+                ((error++))
+            fi
         fi
         echo "[map: $txt] ./game VS $opp $emoji (run $current_run/$total_runs)"
       fi
@@ -154,3 +161,7 @@ for f in "${inputs[@]}"; do
   done
   printf "\n"
 done | column -t -s'|'
+
+
+echo -n "NB erreurs : "
+echo $error

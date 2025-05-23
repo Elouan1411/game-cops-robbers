@@ -34,9 +34,8 @@ bool board_read_from(board *self, FILE *file) {
 
 	if (!fgets(line, sizeof(line), file))
 		return false;
-	sscanf(line, "Cops: %zu", &(self->cops));
 	char extra;
-	if (sscanf(line, "Cops: %zu", &(self->cops), &extra) != 1) {
+	if (sscanf(line, "Cops: %zu %c", &(self->cops), &extra) != 1) {
 		return false;
 	};
 
