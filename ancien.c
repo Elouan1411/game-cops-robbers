@@ -19,8 +19,6 @@ void board_create(board *self) {
  * Auxiliary function to factorize code
  */
 void board_add_edge_uni(board_vertex *source, board_vertex *destination) {
-	if (!source || !destination)
-		return;
 	source->degree++;
 	source->neighbors = realloc(source->neighbors,
 								source->degree * sizeof(*(source->neighbors)));
@@ -35,28 +33,18 @@ bool board_read_from(board *self, FILE *file) {
 	if (!fgets(line, sizeof(line), file))
 		return false;
 	sscanf(line, "Cops: %zu", &(self->cops));
-	char extra;
-	if (sscanf(line, "Cops: %zu", &(self->cops), &extra) != 1) {
-		return false;
-	};
 
 	if (!fgets(line, sizeof(line), file))
 		return false;
-	if (sscanf(line, "Robbers: %zu %c", &(self->robbers), &extra) != 1) {
-		return false;
-	};
+	sscanf(line, "Robbers: %zu", &(self->robbers));
 
 	if (!fgets(line, sizeof(line), file))
 		return false;
-	if (sscanf(line, "Max turn: %zu %c", &(self->max_turn), &extra) != 1) {
-		return false;
-	}
+	sscanf(line, "Max turn: %zu", &(self->max_turn));
 
 	if (!fgets(line, sizeof(line), file))
 		return false;
-	if (sscanf(line, "Vertices: %zu %c", &(self->size), &extra) != 1) {
-		return false;
-	};
+	sscanf(line, "Vertices: %zu", &(self->size));
 
 	self->vertices = calloc(self->size, sizeof(*self->vertices));
 	if (!self->vertices)
@@ -77,9 +65,7 @@ bool board_read_from(board *self, FILE *file) {
 	size_t edges = 0;
 	if (!fgets(line, sizeof(line), file))
 		return false;
-	if (sscanf(line, "Edges: %zu %c", &edges, &extra) != 1) {
-		return false;
-	}
+	sscanf(line, "Edges: %zu", &edges);
 
 	for (size_t i = 0; i < edges; i++) {
 		size_t v1, v2;
@@ -194,8 +180,6 @@ size_t board_dist(board *self, size_t source, size_t dest) {
 	/*      return -1; */
 	/* if (self->dist == NULL || self->next == NULL) */
 	/*      return -1; */
-	if (!self)
-		return 0;
 	if (!self->dist) {
 		board_Floyd_Warshall(self);
 	}
@@ -212,8 +196,6 @@ size_t board_next(board *self, size_t source, size_t dest) {
 	/*      return -1; */
 	/* if (self->dist == NULL || self->next == NULL) */
 	/*      return -1; */
-	if (!self)
-		return 0;
 	if (!self->next) {
 		board_Floyd_Warshall(self);
 	}

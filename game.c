@@ -24,6 +24,17 @@ static int dist_moy_between_summit_and_all_cops(board *b, board_vertex *v,
 static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
 										 board_vertex **cops, size_t ncops);
 static int dist_moy_between_summit_and_all_summits(board *b, board_vertex *v);
+static void move_cops(board *b, board_vertex **out_pos, size_t k,
+					  board_vertex **robbers, size_t nrobbers);
+static int score_move_cop_for_one_neighbor(board *b, board_vertex *pos_neighbor,
+										   board_vertex **cops, size_t ncops);
+static bool summit_is_occupied(board *b, board_vertex *v, board_vertex **role,
+							   size_t nOfRole);
+static int score_move_robber_for_one_neighbor(board *b, board_vertex *v,
+											  board_vertex **robbers,
+											  size_t nrobbers,
+											  board_vertex **cops,
+											  size_t ncops);
 
 #include <stdarg.h>
 void debug(const char *format, ...) {
@@ -231,6 +242,75 @@ static void place_robbers(board *b, board_vertex **out_pos, size_t k,
 	free(scores);
 }
 
+static void move_cops(board *b, board_vertex **pos, size_t k,
+					  board_vertex **robbers, size_t nrobbers) {
+	// TODO
+}
+
+static void move_robbers(board *b, board_vertex **robbers, size_t nrobbers,
+						 board_vertex **cops, size_t ncops) {
+	/* -- 1) S’assurer que l’on dispose des distances -- */
+	if (!b->dist)				 /* dist==NULL → pas encore calculé  */
+		board_Floyd_Warshall(b); /* calcule dist[][] et next[][]     */
+	int score = 0;
+	// Pour chaque position de voleur -> robbers[i]
+	for (size_t i = 0; i < nrobbers; i++) {
+		board_vertex *best_move = NULL;
+		int best_score = INT_MIN;
+
+		// on boucle sur les voisins + la case actuelle
+		for (size_t j = 0; j < robbers[i]->degree + 1; j++) {
+			board_vertex *candidate;
+
+			if (j == robbers[i]->degree) {
+				candidate = robbers[i]; // rester sur place
+			} else {
+				candidate = robbers[i]->neighbors[j];
+			}
+
+			score = score_move_robber_for_one_neighbor(b, candidate, robbers,
+													   nrobbers, cops, ncops);
+
+			if (score > best_score) {
+				best_score = score;
+				best_move = candidate;
+			}
+		}
+
+		robbers[i] = best_move;
+	}
+}
+
+static int score_move_robber_for_one_neighbor(board *b, board_vertex *v,
+											  board_vertex **robbers,
+											  size_t nrobbers,
+											  board_vertex **cops,
+											  size_t ncops) {
+	/* Poids (peut etre a ajuster) */
+	const int W_DIST_MAX =
+		7; // distance_maximale (Éloignement des autres gendarmes déjà placés)
+	const int W_DEGREE = 3;	  // mobilité
+	const int W_DIST_MOY = 2; // Moyenne des distances vers tous les sommets ()
+	const int PENALITY =
+		18; // si case deja occupée par un gendarme (but = dispersé)
+
+	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
+	int degree = v->degree;
+	int dist_moy = dist_moy_between_summit_and_all_summits(b, v);
+	int penality = summit_is_occupied(b, v, robbers, nrobbers) ? -PENALITY : 0;
+
+	/* Score pondéré */
+	int score = W_DIST_MAX * dist_min + W_DEGREE * degree +
+				W_DIST_MOY * dist_moy + penality;
+
+	return score;
+}
+
+static int score_move_cop_for_one_neighbor(board *b, board_vertex *pos_neighbor,
+										   board_vertex **cops, size_t ncops) {
+	// TODO: à faire (faut rajouter dans l'appel la position des voleurs)
+}
+
 static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
 										 board_vertex **cops, size_t ncops) {
 	/* Poids (peut etre a ajuster) */
@@ -304,6 +384,16 @@ static int dist_moy_between_summit_and_all_cops(board *b, board_vertex *v,
 	return total_dist / ncops;
 }
 
+static bool summit_is_occupied(board *b, board_vertex *v, board_vertex **role,
+							   size_t nOfRole) {
+	for (size_t i = 0; i < nOfRole; i++) {
+		if (v->index == role[i]->index) {
+			return true;
+		}
+	}
+	return false;
+}
+
 /*
  * Return the initial or next positions of either the cops or the
  * robbers
@@ -327,12 +417,12 @@ vector *game_next_position(game *self) {
 		// Compute next positions
 		for (size_t i = 0; i < current->size; i++) {
 			if (self->r == COPS) { // deplacement des gendarmes
-				current->positions[i] = self->b.vertices[board_next(
-					&(self->b), current->positions[i]->index,
-					self->b.size - i - 1)];
+								   /* current->positions[i]  */
+				move_cops(&(self->b), current->positions, current->size,
+						  self->robbers.positions, self->robbers.size);
 			} else { // deplacement des voleurs
-				current->positions[i] = self->b.vertices[board_next(
-					&(self->b), current->positions[i]->index, i)];
+				move_robbers(&(self->b), current->positions, current->size,
+							 self->cops.positions, self->cops.size);
 			}
 		}
 	return current;
