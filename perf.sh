@@ -117,7 +117,7 @@ printf -- "-------------|-----------|-------------|-----------\n"
 for opp in "${opponents[@]}"; do
   cop=${wins_cop[$opp]}
   rob=${wins_robber[$opp]}
-  total_opp=$(( 2 * runs * ${#inputs[@]} ))
+  total_opp=$(( 1 * runs * ${#inputs[@]} ))
   
   pcop=$(awk "BEGIN { printf \"%.1f\", ($cop / $total_opp) * 100 }")
   prob=$(awk "BEGIN { printf \"%.1f\", ($rob / $total_opp) * 100 }")

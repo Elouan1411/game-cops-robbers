@@ -114,8 +114,9 @@ void vector_remove_at(vector *self, size_t index) {
 void vector_print(vector *self) {
 	if (self == NULL)
 		return;
-	for (size_t i = 0; i < self->size; i++)
+	for (size_t i = 0; i < self->size; i++) {
 		printf("%zu\n", self->positions[i]->index);
+	}
 	fflush(stdout);
 }
 
@@ -213,7 +214,8 @@ static void place_cops(board *b, board_vertex **out_pos, size_t k) {
 }
 
 static void place_robbers(board *b, board_vertex **out_pos, size_t k,
-						  board_vertex **cops, size_t ncops) {
+						  board_vertex **cops,
+						  size_t ncops) { // TODO: plus éparpillé les voleurs
 	/* -- 1) S’assurer que l’on dispose des distances -- */
 	if (!b->dist)				 /* dist==NULL → pas encore calculé  */
 		board_Floyd_Warshall(b); /* calcule dist[][] et next[][]     */
@@ -292,7 +294,7 @@ static int score_move_robber_for_one_neighbor(board *b, board_vertex *v,
 	const int W_DEGREE = 3;	  // mobilité
 	const int W_DIST_MOY = 2; // Moyenne des distances vers tous les sommets ()
 	const int PENALITY =
-		18; // si case deja occupée par un gendarme (but = dispersé)
+		18; // si case deja occupée par un voleur (but = dispersé)
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
@@ -415,15 +417,13 @@ vector *game_next_position(game *self) {
 
 	} else
 		// Compute next positions
-		for (size_t i = 0; i < current->size; i++) {
-			if (self->r == COPS) { // deplacement des gendarmes
-								   /* current->positions[i]  */
-				move_cops(&(self->b), current->positions, current->size,
-						  self->robbers.positions, self->robbers.size);
-			} else { // deplacement des voleurs
-				move_robbers(&(self->b), current->positions, current->size,
-							 self->cops.positions, self->cops.size);
-			}
+		if (self->r == COPS) { // deplacement des gendarmes
+							   /* current->positions[i]  */
+			move_cops(&(self->b), current->positions, current->size,
+					  self->robbers.positions, self->robbers.size);
+		} else { // deplacement des voleurs
+			move_robbers(&(self->b), current->positions, current->size,
+						 self->cops.positions, self->cops.size);
 		}
 	return current;
 }
