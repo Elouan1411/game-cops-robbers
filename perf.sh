@@ -4,6 +4,8 @@
 
 shopt -s nullglob
 
+start_time=$(date +%s)
+
 ############################
 # Paramètres faciles à éditer
 ############################
@@ -63,27 +65,33 @@ echo "Tests : ${#opponents[@]} adversaires × ${#inputs[@]} fichiers × $runs×2
 
 
 
-total_runs=$(( ${#opponents[@]} * ${#inputs[@]} * 2 * runs ))
-current_run=0
 error=0
+current_run=0
+total_runs=$((runs * ${#inputs[@]} * ${#opponents[@]} * 2))
 
 for txt in "${inputs[@]}"; do
   for opp in "${opponents[@]}"; do
     for ((i=1; i<=runs; i++)); do
+
       # ./game joue Robber
       ((current_run++))
-      res="$($python_cmd server.py "./$opp" "$game" "$txt" 0 2>&1 | tail -n 2 | head -n 1 | tr -d '\r' | xargs)"
+      output="$($python_cmd server.py "./$opp" "$game" "$txt" 0 2>&1)"
+      res="$(printf '%s' "$output" | tail -n 2 | head -n 1 | tr -d '\r' | xargs)"
+
+      if [[ "${output,,}" == *"disqualified"* || "${output,,}" == *"timeout"* ]]; then
+        ((error++))
+        [[ $verbose == true ]] && echo "[ERREUR] $python_cmd server.py ./game $opp $txt 0"
+      fi
+
       if [[ "$verbose" == true ]]; then
         if [[ "${res,,}" == *"robbers win!"* ]]; then
           emoji="✅"
         else
           emoji="❌"
-          if [[ "${res,,}" == *"cops win!"*  ]]; then
-            ((error++))
-          fi
         fi
         echo "[map: $txt] $opp VS ./game $emoji (run $current_run/$total_runs)"
       fi
+
       if [[ "${res,,}" == *"robbers win!"* ]]; then
         ((wins_robber["$opp"]++))
         ((wins_robber_file["$txt"]++))
@@ -92,27 +100,32 @@ for txt in "${inputs[@]}"; do
 
       # ./game joue Cop
       ((current_run++))
-      res="$($python_cmd server.py "$game" "./$opp" "$txt" 0 2>&1 | tail -n 2 | head -n 1 | tr -d '\r' | xargs)"
+      output="$($python_cmd server.py "$game" "./$opp" "$txt" 0 2>&1)"
+      res="$(printf '%s' "$output" | tail -n 2 | head -n 1 | tr -d '\r' | xargs)"
+
+      if [[ "${output,,}" == *"disqualified"* || "${output,,}" == *"timeout"* ]]; then
+        ((error++))
+        [[ $verbose == true ]] && echo "[ERREUR] $python_cmd server.py ./game $opp $txt 0"
+      fi
+
       if [[ "$verbose" == true ]]; then
         if [[ "${res,,}" == *"cops win!"* ]]; then
           emoji="✅"
         else
           emoji="❌"
-            if [[ "${res,,}" == *"robbert win!"*  ]]; then
-                ((error++))
-            fi
         fi
         echo "[map: $txt] ./game VS $opp $emoji (run $current_run/$total_runs)"
       fi
+
       if [[ "${res,,}" == *"cops win!"* ]]; then
         ((wins_cop["$opp"]++))
         ((wins_cop_file["$txt"]++))
         ((wins_cop_file_opp["${txt}_${opp}"]++))
       fi
+
     done
   done
 done
-
 
 
 # Calcul des totaux
@@ -162,6 +175,13 @@ for f in "${inputs[@]}"; do
   printf "\n"
 done | column -t -s'|'
 
+echo
+echo "NB erreurs : $error"
 
-echo -n "NB erreurs : "
-echo $error
+end_time=$(date +%s)
+elapsed=$(( end_time - start_time ))
+
+minutes=$(( elapsed / 60 ))
+seconds=$(( elapsed % 60 ))
+
+echo "Script executed in ${minutes} min ${seconds} sec."

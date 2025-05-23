@@ -253,18 +253,29 @@ static void place_robbers(board *b, board_vertex **out_pos, size_t k,
 static void move_cops(board *b, board_vertex **cops, size_t ncops,
 					  board_vertex **robbers, size_t nrobbers) {
 	/* -- 1) S’assurer que l’on dispose des distances -- */
-	if (!b->dist)				 /* dist==NULL → pas encore calculé  */
+	if (!b->dist) {				 /* dist==NULL → pas encore calculé  */
 		board_Floyd_Warshall(b); /* calcule dist[][] et next[][]     */
+	}
+	// ne pas prendre les gendarmes qui ne peuvent pas bougé
+	board_vertex **real_cops = malloc(ncops * sizeof(board_vertex *));
+	size_t n_real_cops = 0;
+	for (size_t i = 0; i < ncops; i++) {
+		if (cops[i]->degree > 0) {
+			real_cops[n_real_cops++] = cops[i];
+		}
+	}
 
 	// Récupérer le voleur cible
-	board_vertex *target = get_target(b, cops, ncops, robbers, nrobbers);
+	board_vertex *target =
+		get_target(b, real_cops, n_real_cops, robbers, nrobbers);
 
 	// Deplacer tout les gendarmes en direction de la cible
 	// TODO: par la suite , prendre le gendarme le plsu éloigné pour faire un
 	// detour
-	for (size_t i = 0; i < ncops; i++) {
-		size_t index_next = board_next(b, cops[i]->index, target->index);
-		cops[i] = get_board_vertex_from_index(b, index_next);
+	for (size_t i = 0; i < n_real_cops; i++) {
+		size_t index_next = board_next(b, real_cops[i]->index, target->index);
+		board_vertex *res = get_board_vertex_from_index(b, index_next);
+		real_cops[i] = get_board_vertex_from_index(b, index_next);
 	}
 }
 
