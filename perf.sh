@@ -7,7 +7,7 @@ shopt -s nullglob
 ############################
 # Paramètres faciles à éditer
 ############################
-opponents=(bin/low bin/mid)              # autres binaires
+opponents=(bin/low bin/mid bin/high)              # autres binaires
 runs=3                          # nombre d’itérations
 game=./game                      # ton programme
 python_cmd=python3               # ou python
@@ -71,7 +71,7 @@ for txt in "${inputs[@]}"; do
     for ((i=1; i<=runs; i++)); do
       # ./game joue Robber
       ((current_run++))
-      res="$($python_cmd server.py "./$opp" "$game" "$txt" 0 2>&1 | tail -n 1 | tr -d '\r' | xargs)"
+      res="$($python_cmd server.py "./$opp" "$game" "$txt" 0 2>&1 | tail -n 2 | head -n 1 | tr -d '\r' | xargs)"
       if [[ "$verbose" == true ]]; then
         if [[ "${res,,}" == *"robbers win!"* ]]; then
           emoji="✅"
@@ -88,7 +88,7 @@ for txt in "${inputs[@]}"; do
 
       # ./game joue Cop
       ((current_run++))
-      res="$($python_cmd server.py "$game" "./$opp" "$txt" 0 2>&1 | tail -n 1 | tr -d '\r' | xargs)"
+      res="$($python_cmd server.py "$game" "./$opp" "$txt" 0 2>&1 | tail -n 2 | head -n 1 | tr -d '\r' | xargs)"
       if [[ "$verbose" == true ]]; then
         if [[ "${res,,}" == *"cops win!"* ]]; then
           emoji="✅"

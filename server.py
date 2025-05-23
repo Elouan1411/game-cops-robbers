@@ -23,13 +23,16 @@ class Positions:
                 if self.game.graphic:
                     turtles.append(self.turtles[i])
             else:
-                print("Captured robber at position " + str(pos))
+                print(f"Captured robber at position {pos}")
                 if self.game.graphic:
                     self.turtles[i].pendown()
                     self.turtles[i].color("green")
                     self.turtles[i].shape("square")
                     self.turtles[i].setposition(
-                        [x + 0.1 for x in self.game.layout[pos]]
+                        [
+                            x + 0.1 / (2 if len(self.game.M) > 100 else 1)
+                            for x in self.game.layout[pos]
+                        ]
                     )
         self.positions = positions
         self.turtles = turtles
@@ -57,7 +60,7 @@ class Positions:
             return False
         for i, j in zip(self.positions, return_vector):
             if i != -1 and not self.game.M[i][j]:
-                print("Illegal move")
+                print("Illegal move ", return_vector)
                 return False
         self.positions = return_vector
         return True
@@ -68,7 +71,7 @@ class Game:
         try:
             with open(filename) as inst:
                 cops = int(*re.findall(r"\d+", inst.readline()))
-                robbers = int(*re.findall(r"\d+", inst.readline()))
+                self.initial_robbers = int(*re.findall(r"\d+", inst.readline()))
                 self.max_turn = int(*re.findall(r"\d+", inst.readline()))
                 vertices = int(*re.findall(r"\d+", inst.readline()))
                 self.layout = [
@@ -101,10 +104,12 @@ class Game:
             print(f"Error with robbers program: {e}")
             exit(1)
         self.cops = Positions(cops, p_cops.stdout, p_robbers.stdin, self)
-        self.robbers = Positions(robbers, p_robbers.stdout, p_cops.stdin, self)
+        self.robbers = Positions(
+            self.initial_robbers, p_robbers.stdout, p_cops.stdin, self
+        )
         self.remaining_turn = self.max_turn + 2
         self.cops_turn = True
-        self.graphic = graphic == "1"
+        self.graphic = graphic
         if self.graphic:
             self.init_screen()
 
@@ -138,22 +143,23 @@ class Game:
             vertex.fillcolor("white")
             vertex.penup()
             vertex.setposition(self.layout[i])
+            # vertex.write(f"{i}", font=("Arial", 20, "normal"))
         # Prepare counter
         self.counter = Turtle()
         self.counter.hideturtle()
         self.counter.penup()
-        self.counter.setposition(-0.95, 0.95)
+        self.counter.setposition(-1, 1)
         # Prepare cops
         self.screen.tracer(1)
 
     # Start iteration
     def print_start_iteration(self):
-        self.pos = g.cops if g.cops_turn else g.robbers
-        self.role = "cops" if g.cops_turn else "robbers"
-        if g.remaining_turn > g.max_turn:
+        self.pos = self.cops if self.cops_turn else self.robbers
+        self.role = "cops" if self.cops_turn else "robbers"
+        if self.remaining_turn > self.max_turn:
             msg = f"Initial positions for {self.role}"
         else:
-            msg = f"Turn for {self.role} (remaining: " + str(g.remaining_turn) + ")"
+            msg = f"Turn for {self.role} (remaining: {self.remaining_turn})"
         print(msg)
         # Update graphic counter
         if self.graphic:
@@ -165,8 +171,12 @@ class Game:
         # Read new positions from one program
         if not self.pos.new_positions():
             print(f"No new positions for {self.role}: DISQUALIFIED")
-            if not g.cops_turn:
-                g.robbers.positions = []
+            # Automatically go to end game (e.g., capture all robbers
+            # if it was their turn to give victory to cops)
+            if self.cops_turn:
+                self.remaining_turn = 0
+            else:
+                self.robbers.positions = []
             return False
         return True
 
@@ -212,16 +222,20 @@ class Game:
 
     # End game result
     def end_game(self):
-        if len(g.robbers.positions) == 0:
+        remaining_robbers = len(self.robbers.positions)
+        if remaining_robbers == 0:
             msg = "Cops win!"
         else:
             msg = "Robbers win!"
         print(msg)
+        turn = min(100, int(100 * self.remaining_turn / self.max_turn))
+        robbers = int(100 * remaining_robbers / self.initial_robbers)
+        print(f"Score for cops (negative for robbers): {turn - robbers} points")
         # Update graphic counter
         if self.graphic:
             self.counter.clear()
             self.counter.write(msg, move=False, font=("Arial", 16, "normal"))
-            g.screen.exitonclick()
+            self.screen.exitonclick()
 
 
 if __name__ == "__main__":
@@ -229,7 +243,7 @@ if __name__ == "__main__":
         print("Usage: python ./server.py cops robbers filename 0/1")
         exit(1)
 
-    g = Game(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    g = Game(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4] == "1")
 
     # Main loop
     while len(g.robbers.positions) != 0 and g.remaining_turn != 0:

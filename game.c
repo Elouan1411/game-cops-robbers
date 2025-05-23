@@ -25,6 +25,22 @@ static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
 										 board_vertex **cops, size_t ncops);
 static int dist_moy_between_summit_and_all_summits(board *b, board_vertex *v);
 
+#include <stdarg.h>
+void debug(const char *format, ...) {
+	FILE *fichier = fopen("debug.log", "a");
+	if (fichier == NULL) {
+		perror("Erreur lors de l'ouverture du fichier");
+		return;
+	}
+
+	va_list args;
+	va_start(args, format);
+	vfprintf(fichier, format, args);
+	fprintf(fichier, "\n");
+	va_end(args);
+
+	fclose(fichier);
+}
 // Structure pour stocker une valeur et son indice
 typedef struct {
 	int value;
@@ -150,6 +166,14 @@ static void place_cops(board *b, board_vertex **out_pos, size_t k) {
 	if (!b->dist)
 		board_Floyd_Warshall(b);
 
+	// Cas où y a moins de case que de gendarmes
+	if (b->size <= k) {
+		for (size_t i = 0; i < k; i++) {
+			out_pos[i] = b->vertices[i % b->size];
+		}
+		return;
+	}
+
 	// Tableau pour suivre les sommets déjà sélectionnés
 	bool *selected = calloc(b->size, sizeof(bool));
 
@@ -176,12 +200,21 @@ static void place_cops(board *b, board_vertex **out_pos, size_t k) {
 	}
 	free(selected);
 }
-// TODO: faire une seule fonction pour les deux
+
 static void place_robbers(board *b, board_vertex **out_pos, size_t k,
 						  board_vertex **cops, size_t ncops) {
 	/* -- 1) S’assurer que l’on dispose des distances -- */
 	if (!b->dist)				 /* dist==NULL → pas encore calculé  */
 		board_Floyd_Warshall(b); /* calcule dist[][] et next[][]     */
+
+	// Cas où y a moins de case que de voleurs
+	if (b->size <= k) {
+		for (size_t i = 0; i < k; i++) {
+			out_pos[i] = b->vertices[i % b->size];
+		}
+
+		return;
+	}
 
 	int *scores = calloc(b->size, sizeof(int));
 	for (size_t i = 0; i < b->size; i++) {
