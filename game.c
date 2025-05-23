@@ -258,10 +258,14 @@ static void move_cops(board *b, board_vertex **cops, size_t ncops,
 	}
 	// ne pas prendre les gendarmes qui ne peuvent pas bougé
 	board_vertex **real_cops = malloc(ncops * sizeof(board_vertex *));
+	int *num_real_cops = calloc(ncops, sizeof(int));
 	size_t n_real_cops = 0;
 	for (size_t i = 0; i < ncops; i++) {
 		if (cops[i]->degree > 0) {
+			num_real_cops[i] = i;
 			real_cops[n_real_cops++] = cops[i];
+		} else {
+			num_real_cops[i] = -1;
 		}
 	}
 
@@ -277,6 +281,15 @@ static void move_cops(board *b, board_vertex **cops, size_t ncops,
 		board_vertex *res = get_board_vertex_from_index(b, index_next);
 		real_cops[i] = get_board_vertex_from_index(b, index_next);
 	}
+
+	for (size_t i = 0; i < ncops; i++) {
+		if (num_real_cops[i] != -1) {
+			cops[num_real_cops[i]] = real_cops[i];
+		}
+	}
+
+	free(real_cops);
+	free(num_real_cops);
 }
 
 static void move_robbers(board *b, board_vertex **robbers, size_t nrobbers,
