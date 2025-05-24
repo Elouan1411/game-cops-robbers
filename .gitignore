@@ -14,3 +14,7 @@
 
 # Ignore les fichiers de sauvegarde
 *.bak
+
+
+
+venv

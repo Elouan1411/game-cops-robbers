@@ -15,7 +15,9 @@ static int min_dist_between_summit_and_all_cops(board *b, board_vertex *v,
 												size_t ncops);
 static void place_cops(board *b, board_vertex **out_pos, size_t k);
 static int score_pos_robber_for_one_summit(board *b, board_vertex *v,
-										   board_vertex **cops, size_t ncops);
+										   board_vertex **cops, size_t ncops,
+										   board_vertex **robbers,
+										   size_t nrobbers);
 static void place_robbers(board *b, board_vertex **out_pos, size_t k,
 						  board_vertex **cops, size_t ncops);
 static int dist_moy_between_summit_and_all_cops(board *b, board_vertex *v,
@@ -45,6 +47,9 @@ static board_vertex *get_2nd_best_neighbor(board *b, board_vertex *start,
 										   board_vertex **used_positions,
 										   size_t n_used_positions,
 										   board_vertex *target);
+static int dist_moy_between_summit_and_all_robbers(board *b, board_vertex *v,
+												   board_vertex **robbers,
+												   size_t nrobbers);
 
 #include <stdarg.h>
 void debug(const char *format, ...) {
@@ -240,19 +245,31 @@ static void place_robbers(board *b, board_vertex **out_pos, size_t k,
 		return;
 	}
 
-	int *scores = calloc(b->size, sizeof(int));
-	for (size_t i = 0; i < b->size; i++) {
-		scores[i] =
-			score_pos_robber_for_one_summit(b, b->vertices[i], cops, ncops);
-	}
-	/* et garder les k meilleurs */
-	int *index_best = top_k_indices(scores, b->size, k);
-	// remplir le tableau de sortie
+	bool *selected = calloc(b->size, sizeof(bool));
+
 	for (size_t i = 0; i < k; i++) {
-		out_pos[i] = b->vertices[index_best[i]];
+		int best_score = INT_MIN;
+		int best_idx = -1;
+
+		for (size_t j = 0; j < b->size; j++) {
+			if (selected[j])
+				continue;
+
+			int score = score_pos_robber_for_one_summit(b, b->vertices[j], cops,
+														ncops, out_pos, i);
+
+			if (score > best_score) {
+				best_score = score;
+				best_idx = j;
+			}
+		}
+
+		if (best_idx != -1) {
+			out_pos[i] = b->vertices[best_idx];
+			selected[best_idx] = true;
+		}
 	}
-	free(index_best);
-	free(scores);
+	free(selected);
 }
 
 static void move_cops(board *b, board_vertex **cops, size_t ncops,
@@ -551,20 +568,32 @@ static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
  *  ncops      : nombre de gendarmes
  * -------------------------------------------------------------------*/
 static int score_pos_robber_for_one_summit(board *b, board_vertex *v,
-										   board_vertex **cops, size_t ncops) {
+										   board_vertex **cops, size_t ncops,
+										   board_vertex **robbers,
+										   size_t nrobbers) {
 	/* Poids (peut etre a ajuster) */
 	const int W_DIST_MIN = 5; // distance minimale (le plus important)
 	const int W_DEGREE = 2;	  // mobilité / échappatoires
 	const int W_DIST_MOY = 1; // distance moyenne (utile si plusieurs gendarmes)
+	const int W_DIST_MOY_WITH_ROBBERS = 3; // dispersé les gendarmes
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
 	int dist_moy = dist_moy_between_summit_and_all_cops(b, v, cops, ncops);
+	int dist_moy_with_robber =
+		dist_moy_between_summit_and_all_robbers(b, v, robbers, nrobbers);
 	/* Score pondéré */
-	int score =
-		W_DIST_MIN * dist_min + W_DEGREE * degree + W_DIST_MOY * dist_moy;
+	int score = W_DIST_MIN * dist_min + W_DEGREE * degree +
+				W_DIST_MOY * dist_moy +
+				W_DIST_MOY_WITH_ROBBERS * dist_moy_with_robber;
 
 	return score;
+}
+
+static int dist_moy_between_summit_and_all_robbers(board *b, board_vertex *v,
+												   board_vertex **robbers,
+												   size_t nrobbers) {
+	return dist_moy_between_summit_and_all_cops(b, v, robbers, nrobbers);
 }
 
 static int min_dist_between_summit_and_all_cops(board *b, board_vertex *v,
