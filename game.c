@@ -545,9 +545,10 @@ static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
 										 board_vertex **cops, size_t ncops) {
 	/* Poids (peut etre a ajuster) */
 	const int W_DIST_MAX =
-		7; // distance_maximale (Éloignement des autres gendarmes déjà placés)
-	const int W_DEGREE = 3;	  // mobilité
-	const int W_DIST_MOY = 2; // Moyenne des distances vers tous les sommets
+		9; // distance_maximale (Éloignement des autres gendarmes déjà placés)
+
+	const int W_DEGREE = 7;	  // mobilité
+	const int W_DIST_MOY = 5; // Moyenne des distances vers tous les sommets
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
@@ -574,8 +575,8 @@ static int score_pos_robber_for_one_summit(board *b, board_vertex *v,
 	/* Poids (peut etre a ajuster) */
 	const int W_DIST_MIN = 5; // distance minimale (le plus important)
 	const int W_DEGREE = 2;	  // mobilité / échappatoires
-	const int W_DIST_MOY = 1; // distance moyenne (utile si plusieurs gendarmes)
-	const int W_DIST_MOY_WITH_ROBBERS = 3; // dispersé les gendarmes
+	const int W_DIST_MOY = 6; // distance moyenne (utile si plusieurs gendarmes)
+	const int W_DIST_MOY_WITH_ROBBERS = 5; // dispersé les gendarmes
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
