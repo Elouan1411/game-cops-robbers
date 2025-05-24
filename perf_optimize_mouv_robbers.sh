@@ -9,14 +9,14 @@ start_time=$(date +%s)
 ############################
 # Paramètres faciles à éditer
 ############################
-opponents=(bin/low bin/mid bin/high)             
+opponents=(bin/mid bin/high)              # autres binaires
 runs=3                          # nombre d’itérations
-game=./game                     
-python_cmd=python3              
-verbose=false                    
+game=./game_opti_mouv_robbers                      # ton programme
+python_cmd=python3               # ou python
+verbose=false                    # mode verbeux
 ############################
 
-
+# Gestion de l'option verbose
 
 args=("$@")  # convertit en tableau pour accéder avec un index
 
@@ -131,60 +131,20 @@ for txt in "${inputs[@]}"; do
 done
 
 
-# Calcul des totaux
-total_general=$(( 2 * runs * ${#inputs[@]} * ${#opponents[@]} ))
 
-printf "\n===== Résultats par adversaire =====\n"
-printf "%-12s | %9s | %11s | %9s\n" "Adversaire" "Cop(%)" "Robber(%)" "Total(%)"
-printf -- "-------------|-----------|-------------|-----------\n"
+total_score=0
+count=0
+
 for opp in "${opponents[@]}"; do
   cop=${wins_cop[$opp]}
   rob=${wins_robber[$opp]}
   total_opp=$(( 1 * runs * ${#inputs[@]} ))
-  
-  pcop=$(awk "BEGIN { printf \"%.1f\", ($cop / $total_opp) * 100 }")
-  prob=$(awk "BEGIN { printf \"%.1f\", ($rob / $total_opp) * 100 }")
+
   ptotal=$(awk "BEGIN { printf \"%.1f\", (($cop + $rob) / (2 * $total_opp)) * 100 }")
-  
-  printf "%-12s | %7s%% | %9s%% | %7s%%\n" \
-         "$opp" "$pcop" "$prob" "$ptotal"
-done | column -t -s'|'
-
-printf "\n===== Résultats par fichier =====\n"
-printf "%-15s" "Fichier"
-for opp in "${opponents[@]}"; do
-  printf " | %-11s | %-13s | %-9s" "$opp Cop(%)" "$opp Robber(%)" "$opp Total"
+  total_score=$(awk "BEGIN { printf \"%.2f\", $total_score + $ptotal }")
+  count=$((count + 1))
 done
-printf "\n"
 
-printf -- "%-15s" "---------------"
-for opp in "${opponents[@]}"; do
-  printf " | %s | %s | %s" "-----------" "-------------" "---------"
-done
-printf "\n"
+avg_score=$(awk "BEGIN { if ($count > 0) printf \"%.2f\", $total_score / $count; else print 0 }")
+echo "$avg_score"
 
-for f in "${inputs[@]}"; do
-  printf "%-15s" "$f"
-  for opp in "${opponents[@]}"; do
-    cop=${wins_cop_file_opp["${f}_${opp}"]}
-    rob=${wins_robber_file_opp["${f}_${opp}"]}
-    
-    pcop=$(awk "BEGIN { printf \"%.1f\", ($cop / $runs) * 100 }")
-    prob=$(awk "BEGIN { printf \"%.1f\", ($rob / $runs) * 100 }")
-    ptotal=$(awk "BEGIN { printf \"%.1f\", ($cop + $rob) / (2 * $runs) * 100 }")
-    
-    printf " | %7s%%     | %9s%%       | %7s%%" "$pcop" "$prob" "$ptotal"
-  done
-  printf "\n"
-done | column -t -s'|'
-
-echo
-echo "NB erreurs : $error"
-
-end_time=$(date +%s)
-elapsed=$(( end_time - start_time ))
-
-minutes=$(( elapsed / 60 ))
-seconds=$(( elapsed % 60 ))
-
-echo "Script executed in ${minutes} min ${seconds} sec."

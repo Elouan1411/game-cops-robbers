@@ -230,8 +230,7 @@ static void place_cops(board *b, board_vertex **out_pos, size_t k) {
 }
 
 static void place_robbers(board *b, board_vertex **out_pos, size_t k,
-						  board_vertex **cops,
-						  size_t ncops) { // TODO: plus éparpillé les voleurs
+						  board_vertex **cops, size_t ncops) {
 	/* -- 1) S’assurer que l’on dispose des distances -- */
 	if (!b->dist)				 /* dist==NULL → pas encore calculé  */
 		board_Floyd_Warshall(b); /* calcule dist[][] et next[][]     */
@@ -523,11 +522,11 @@ static int score_move_robber_for_one_neighbor(board *b, board_vertex *v,
 											  size_t ncops) {
 	/* Poids (peut etre a ajuster) */
 	const int W_DIST_MAX =
-		7; // distance_maximale (Éloignement des autres gendarmes déjà placés)
-	const int W_DEGREE = 3;	  // mobilité
-	const int W_DIST_MOY = 2; // Moyenne des distances vers tous les sommets ()
+		4; // distance_maximale (Éloignement des autres gendarmes déjà placés)
+	const int W_DEGREE = 1;	  // mobilité
+	const int W_DIST_MOY = 1; // Moyenne des distances vers tous les sommets ()
 	const int PENALITY =
-		18; // si case deja occupée par un voleur (but = dispersé)
+		15; // si case deja occupée par un voleur (but = dispersé)
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
@@ -545,10 +544,10 @@ static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
 										 board_vertex **cops, size_t ncops) {
 	/* Poids (peut etre a ajuster) */
 	const int W_DIST_MAX =
-		9; // distance_maximale (Éloignement des autres gendarmes déjà placés)
+		1; // distance_maximale (Éloignement des autres gendarmes déjà placés)
 
-	const int W_DEGREE = 7;	  // mobilité
-	const int W_DIST_MOY = 5; // Moyenne des distances vers tous les sommets
+	const int W_DEGREE = 2;	  // mobilité
+	const int W_DIST_MOY = 8; // Moyenne des distances vers tous les sommets
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
