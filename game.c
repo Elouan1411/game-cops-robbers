@@ -41,6 +41,10 @@ static board_vertex *get_best_candidate(board_vertex **candidates,
 static board_vertex *get_target(board *b, board_vertex **cops, size_t ncops,
 								board_vertex **robbers, size_t nrobbers);
 static board_vertex *get_board_vertex_from_index(board *b, size_t index);
+static board_vertex *get_2nd_best_neighbor(board *b, board_vertex *start,
+										   board_vertex **used_positions,
+										   size_t n_used_positions,
+										   board_vertex *target);
 
 #include <stdarg.h>
 void debug(const char *format, ...) {
@@ -58,6 +62,7 @@ void debug(const char *format, ...) {
 
 	fclose(fichier);
 }
+
 // Structure pour stocker une valeur et son indice
 typedef struct {
 	int value;
@@ -240,7 +245,7 @@ static void place_robbers(board *b, board_vertex **out_pos, size_t k,
 		scores[i] =
 			score_pos_robber_for_one_summit(b, b->vertices[i], cops, ncops);
 	}
-	/* et garder les k meilleurs*/
+	/* et garder les k meilleurs */
 	int *index_best = top_k_indices(scores, b->size, k);
 	// remplir le tableau de sortie
 	for (size_t i = 0; i < k; i++) {
@@ -260,7 +265,8 @@ static void move_cops(board *b, board_vertex **cops, size_t ncops,
 	board_vertex **real_cops = malloc(ncops * sizeof(board_vertex *));
 	int *num_real_cops = calloc(ncops, sizeof(int));
 	size_t n_real_cops = 0;
-	for (size_t i = 0; i < ncops; i++) {
+	for (size_t i = 0; i < ncops; i++) { // TODO: il faudrait que le dernier
+										 // prenne completement un autre chemin
 		if (cops[i]->degree > 0) {
 			num_real_cops[i] = i;
 			real_cops[n_real_cops++] = cops[i];
@@ -273,13 +279,30 @@ static void move_cops(board *b, board_vertex **cops, size_t ncops,
 	board_vertex *target =
 		get_target(b, real_cops, n_real_cops, robbers, nrobbers);
 
+	// tableau qui enregistre les positions pour ne pas que deux gendarmes se
+	// retrouve sur la meme case
+	board_vertex **used_positions =
+		malloc(n_real_cops * sizeof(board_vertex *));
+	size_t n_used_positions = 0;
+
 	// Deplacer tout les gendarmes en direction de la cible
-	// TODO: par la suite , prendre le gendarme le plsu éloigné pour faire un
-	// detour
+	// L'algo essaye de ne pas placer 2 gendarmes sur la meme case
 	for (size_t i = 0; i < n_real_cops; i++) {
 		size_t index_next = board_next(b, real_cops[i]->index, target->index);
 		board_vertex *res = get_board_vertex_from_index(b, index_next);
-		real_cops[i] = get_board_vertex_from_index(b, index_next);
+		if (is_in_tab(used_positions, n_used_positions, res) != -1) {
+			// Si la position est deja prise on regarde les voisins et on prend
+			// la meilleur
+			real_cops[i] = get_2nd_best_neighbor(
+				b, real_cops[i], used_positions, n_used_positions, target);
+			if (!real_cops[i]) {
+				real_cops[i] = res;
+			}
+		} else {
+			real_cops[i] = res;
+		}
+		used_positions[n_used_positions] = real_cops[i];
+		n_used_positions++;
 	}
 
 	for (size_t i = 0; i < ncops; i++) {
@@ -290,6 +313,7 @@ static void move_cops(board *b, board_vertex **cops, size_t ncops,
 
 	free(real_cops);
 	free(num_real_cops);
+	free(used_positions);
 }
 
 static void move_robbers(board *b, board_vertex **robbers, size_t nrobbers,
@@ -326,6 +350,33 @@ static void move_robbers(board *b, board_vertex **robbers, size_t nrobbers,
 	}
 }
 
+static board_vertex *get_2nd_best_neighbor(board *b, board_vertex *start,
+										   board_vertex **used_positions,
+										   size_t n_used_positions,
+										   board_vertex *target) {
+	// Si pas d'autre possibilité on va quand meme sur la meme case
+	if (start->degree == 1) {
+		return NULL;
+	}
+
+	// Sinon on choisit la case voisine (ou la case start) où la distance avec
+	// le gendarme est la plus proche
+	board_vertex *best_neighbor = NULL;
+	size_t dist_best_neighbor = INT_MAX;
+	board_vertex *current = NULL;
+	for (size_t i = 0; i < start->degree; i++) {
+		current = start->neighbors[i];
+		if (is_in_tab(used_positions, n_used_positions, current) != -1) {
+			current = start;
+		}
+		if (board_dist(b, current->index, target->index) < dist_best_neighbor) {
+			dist_best_neighbor = board_dist(b, current->index, target->index);
+			best_neighbor = current;
+		}
+	}
+	return best_neighbor;
+}
+
 static board_vertex *get_board_vertex_from_index(board *b, size_t index) {
 	for (size_t i = 0; i < b->size; i++) {
 		if (b->vertices[i]->index == index) {
@@ -333,10 +384,6 @@ static board_vertex *get_board_vertex_from_index(board *b, size_t index) {
 		}
 	}
 	return NULL;
-}
-
-static board_vertex *get_robber_who_make_detour() {
-	// TODO
 }
 
 // retourne le voleur à prendre pour cible pour tout les gendarmes
@@ -356,7 +403,7 @@ static board_vertex *get_target(board *b, board_vertex **cops, size_t ncops,
 	size_t *votes = calloc(ncops, sizeof(size_t));
 
 	for (size_t i = 0; i < ncops; i++) { // pour chaque gendarme
-										 // trouver le voleur le plus proche
+		// trouver le voleur le plus proche
 		int min_dist = INT_MAX;
 		board_vertex *target = NULL;
 		for (size_t j = 0; j < nrobbers; j++) {
@@ -582,7 +629,7 @@ vector *game_next_position(game *self) {
 	} else
 		// Compute next positions
 		if (self->r == COPS) { // deplacement des gendarmes
-							   /* current->positions[i]  */
+			/* current->positions[i]  */
 			move_cops(&(self->b), current->positions, current->size,
 					  self->robbers.positions, self->robbers.size);
 		} else { // deplacement des voleurs
