@@ -50,6 +50,12 @@ static board_vertex *get_2nd_best_neighbor(board *b, board_vertex *start,
 static int dist_moy_between_summit_and_all_robbers(board *b, board_vertex *v,
 												   board_vertex **robbers,
 												   size_t nrobbers);
+static void initialize_path_of_cops(board *b);
+static void mark_path_of_cops(board *b, board_vertex *start,
+							  board_vertex *target);
+static void free_path_cops(board *b);
+static int get_nb_of_same_summits(board *b, board_vertex *start,
+								  board_vertex *target);
 
 #include <stdarg.h>
 void debug(const char *format, ...) {
@@ -291,6 +297,8 @@ static void move_cops(board *b, board_vertex **cops, size_t ncops,
 		}
 	}
 
+	initialize_path_of_cops(b);
+
 	// Récupérer le voleur cible
 	board_vertex *target =
 		get_target(b, real_cops, n_real_cops, robbers, nrobbers);
@@ -317,6 +325,7 @@ static void move_cops(board *b, board_vertex **cops, size_t ncops,
 		} else {
 			real_cops[i] = res;
 		}
+		mark_path_of_cops(b, real_cops[i], target);
 		used_positions[n_used_positions] = real_cops[i];
 		n_used_positions++;
 	}
@@ -326,7 +335,7 @@ static void move_cops(board *b, board_vertex **cops, size_t ncops,
 			cops[num_real_cops[i]] = real_cops[i];
 		}
 	}
-
+	free_path_cops(b);
 	free(real_cops);
 	free(num_real_cops);
 	free(used_positions);
@@ -366,6 +375,31 @@ static void move_robbers(board *b, board_vertex **robbers, size_t nrobbers,
 	}
 }
 
+static void initialize_path_of_cops(board *b) {
+	for (size_t i = 0; i < b->size; i++) {
+		b->vertices[i]->optim = malloc(sizeof(bool));
+		b->vertices[i]->optim[0] = false;
+	}
+}
+
+static void free_path_cops(board *b) {
+	for (size_t i = 0; i < b->size; i++) {
+		free(b->vertices[i]->optim);
+	}
+}
+
+static void mark_path_of_cops(board *b, board_vertex *start,
+							  board_vertex *target) {
+	size_t dist = board_dist(b, start->index, target->index);
+	board_vertex *actual = start;
+	for (size_t i = 0; i < dist; i++) {
+		actual->optim[0] = true;
+		// Récupérer le prochain sommet du trajet
+		actual = get_board_vertex_from_index(
+			b, board_next(b, actual->index, target->index));
+	}
+}
+
 static board_vertex *get_2nd_best_neighbor(board *b, board_vertex *start,
 										   board_vertex **used_positions,
 										   size_t n_used_positions,
@@ -375,22 +409,49 @@ static board_vertex *get_2nd_best_neighbor(board *b, board_vertex *start,
 		return NULL;
 	}
 
+	const int W_DIST =
+		8; // importance de la distance entre le voisin et la cible
+	const int W_SAME_PATH =
+		7; // importance que le nombre de sommet en commun pour faire le trajet
+		   // avec un autre gendarme soit faible (pour ne pas prendre les mêmes
+		   // chemins)
+
 	// Sinon on choisit la case voisine (ou la case start) où la distance avec
 	// le gendarme est la plus proche
 	board_vertex *best_neighbor = NULL;
-	size_t dist_best_neighbor = INT_MAX;
+	int best_score = INT_MAX;
 	board_vertex *current = NULL;
 	for (size_t i = 0; i < start->degree; i++) {
 		current = start->neighbors[i];
 		if (is_in_tab(used_positions, n_used_positions, current) != -1) {
 			current = start;
 		}
-		if (board_dist(b, current->index, target->index) < dist_best_neighbor) {
-			dist_best_neighbor = board_dist(b, current->index, target->index);
+
+		int score = board_dist(b, current->index, target->index) * W_DIST +
+					get_nb_of_same_summits(b, current, target) * W_SAME_PATH;
+		if (score < best_score) {
+			best_score = score;
 			best_neighbor = current;
 		}
 	}
 	return best_neighbor;
+}
+
+// Compte le nombre de sommet commun entre ceux deja utilisé par d'autres
+// gendarme et ceux que le gendarme a prevu de prendre si il va sur start (un de
+// ses voisins)
+static int get_nb_of_same_summits(board *b, board_vertex *start,
+								  board_vertex *target) {
+	int nb = 0;
+	board_vertex *current = start;
+	for (size_t i = 0; i < board_dist(b, current->index, target->index); i++) {
+		if (current->optim[0]) {
+			nb++;
+		}
+		current = get_board_vertex_from_index(
+			b, board_next(b, current->index, target->index));
+	}
+	return nb;
 }
 
 static board_vertex *get_board_vertex_from_index(board *b, size_t index) {
@@ -572,10 +633,10 @@ static int score_pos_robber_for_one_summit(board *b, board_vertex *v,
 										   board_vertex **robbers,
 										   size_t nrobbers) {
 	/* Poids (peut etre a ajuster) */
-	const int W_DIST_MIN = 5; // distance minimale (le plus important)
-	const int W_DEGREE = 2;	  // mobilité / échappatoires
-	const int W_DIST_MOY = 6; // distance moyenne (utile si plusieurs gendarmes)
-	const int W_DIST_MOY_WITH_ROBBERS = 5; // dispersé les gendarmes
+	const int W_DIST_MIN = 3; // distance minimale (le plus important)
+	const int W_DEGREE = 5;	  // mobilité / échappatoires
+	const int W_DIST_MOY = 2; // distance moyenne (utile si plusieurs gendarmes)
+	const int W_DIST_MOY_WITH_ROBBERS = 6; // dispersé les gendarmes
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;

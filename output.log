@@ -1,0 +1,5 @@
+===== Résultats par adversaire =====                              
+Adversaire                                Cop(%)      Robber(%)     Total(%)
+-------------                         -----------  -------------  -----------
+bin/mid                                   50,0%          64,3%        57,1%
+bin/high                                  28,6%          35,7%        32,1%

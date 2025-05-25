@@ -11,7 +11,7 @@ start_time=$(date +%s)
 ############################
 opponents=(bin/mid bin/high)              # autres binaires
 runs=3                          # nombre d’itérations
-game=./game_opti_pos_cops                      # ton programme
+game=./game_opti_mouv_cops                      # ton programme
 python_cmd=python3               # ou python
 verbose=false                    # mode verbeux
 ############################
@@ -129,6 +129,12 @@ for txt in "${inputs[@]}"; do
     done
   done
 done
+
+
+
+
+
+
 
 
 

@@ -136,15 +136,30 @@ total_score=0
 count=0
 
 for opp in "${opponents[@]}"; do
-  cop=${wins_cop[$opp]}
-  rob=${wins_robber[$opp]}
-  total_opp=$(( 1 * runs * ${#inputs[@]} ))
+  total_cop=0
+  total_rob=0
 
-  ptotal=$(awk "BEGIN { printf \"%.1f\", (($cop + $rob) / (2 * $total_opp)) * 100 }")
-  total_score=$(awk "BEGIN { printf \"%.2f\", $total_score + $ptotal }")
+  for f in "${inputs[@]}"; do
+    cop=${wins_cop_file_opp["${f}_${opp}"]}
+    rob=${wins_robber_file_opp["${f}_${opp}"]}
+
+    total_cop=$((total_cop + cop))
+    total_rob=$((total_rob + rob))
+  done
+
+  total_opp=$(( runs * ${#inputs[@]} ))
+  ptotal=$(awk -v c="$total_cop" -v r="$total_rob" -v t="$total_opp" \
+                'BEGIN { printf "%.4f", (c + r) / (2 * t) }')
+
+  total_score=$(awk -v s="$total_score" -v p="$ptotal" \
+                      'BEGIN { printf "%.4f", s + p }')
   count=$((count + 1))
 done
 
-avg_score=$(awk "BEGIN { if ($count > 0) printf \"%.2f\", $total_score / $count; else print 0 }")
+
+avg_score=$(awk -v s="$total_score" -v c="$count" \
+                  'BEGIN { if (c > 0) printf "%.2f", (s / c) * 100; else print 0 }')
+
+
 echo "$avg_score"
 
