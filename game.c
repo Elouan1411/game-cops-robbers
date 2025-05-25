@@ -583,11 +583,11 @@ static int score_move_robber_for_one_neighbor(board *b, board_vertex *v,
 											  size_t ncops) {
 	/* Poids (peut etre a ajuster) */
 	const int W_DIST_MAX =
-		4; // distance_maximale (Éloignement des autres gendarmes déjà placés)
+		10; // distance_maximale (Éloignement des autres gendarmes déjà placés)
 	const int W_DEGREE = 1;	  // mobilité
-	const int W_DIST_MOY = 1; // Moyenne des distances vers tous les sommets ()
+	const int W_DIST_MOY = 5; // Moyenne des distances vers tous les sommets ()
 	const int PENALITY =
-		15; // si case deja occupée par un voleur (but = dispersé)
+		13; // si case deja occupée par un voleur (but = dispersé)
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
@@ -607,8 +607,8 @@ static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
 	const int W_DIST_MAX =
 		1; // distance_maximale (Éloignement des autres gendarmes déjà placés)
 
-	const int W_DEGREE = 2;	  // mobilité
-	const int W_DIST_MOY = 8; // Moyenne des distances vers tous les sommets
+	const int W_DEGREE = 8;	  // mobilité
+	const int W_DIST_MOY = 6; // Moyenne des distances vers tous les sommets
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
@@ -633,10 +633,10 @@ static int score_pos_robber_for_one_summit(board *b, board_vertex *v,
 										   board_vertex **robbers,
 										   size_t nrobbers) {
 	/* Poids (peut etre a ajuster) */
-	const int W_DIST_MIN = 3; // distance minimale (le plus important)
-	const int W_DEGREE = 5;	  // mobilité / échappatoires
-	const int W_DIST_MOY = 2; // distance moyenne (utile si plusieurs gendarmes)
-	const int W_DIST_MOY_WITH_ROBBERS = 6; // dispersé les gendarmes
+	const int W_DIST_MIN = 10; // distance minimale (le plus important)
+	const int W_DEGREE = 5;	   // mobilité / échappatoires
+	const int W_DIST_MOY = 5; // distance moyenne (utile si plusieurs gendarmes)
+	const int W_DIST_MOY_WITH_ROBBERS = 7; // dispersé les gendarmes
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
