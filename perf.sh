@@ -10,6 +10,8 @@ start_time=$(date +%s)
 # Paramètres faciles à éditer
 ############################
 opponents=(bin/low bin/mid bin/high)             
+
+# opponents=(kiki)             
 runs=3                          # nombre d’itérations
 game=./game                     
 python_cmd=python3              

@@ -1,0 +1,3134 @@
+ABDAL MUMIM BENSEHAMDI
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+0.42 54424
+Test 0 passed
+Start test 1
+0.46 54484
+Test 1 passed
+Start test 2
+==121== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==121==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==121==    by 0x10958B: board_read_from (algo.c:65)
+==121==    by 0x10A775: test_board_read_from_invalid_cops (algo_tests.c:66)
+==121==    by 0x10927E: main (algo_tests.c:422)
+==121== 
+0.43 54540
+Test 2 failed: error, success reading incorrect board
+Start test 3
+==140== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==140==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==140==    by 0x10958B: board_read_from (algo.c:65)
+==140==    by 0x10A6A6: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==140==    by 0x10927E: main (algo_tests.c:422)
+==140== 
+0.43 54460
+Test 3 failed: error, success reading incorrect board
+Start test 4
+0.44 54540
+Test 4 passed
+Start test 5
+0.43 54484
+Test 5 passed
+Start test 6
+==197== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==197==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==197==    by 0x10958B: board_read_from (algo.c:65)
+==197==    by 0x10A3CE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==197==    by 0x10927E: main (algo_tests.c:422)
+==197== 
+0.43 54544
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54420
+Test 7 passed
+Start test 8
+0.44 54544
+Test 8 passed
+Start test 9
+0.44 54544
+Test 9 passed
+Start test 10
+0.44 54540
+Test 10 passed
+Start test 11
+0.44 54544
+Test 11 passed
+Start test 12
+==311== 152 (24 direct, 128 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==311==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==311==    by 0x10958B: board_read_from (algo.c:65)
+==311==    by 0x10A133: test_board_Floyd_Warshall_chain (algo_tests.c:286)
+==311==    by 0x10927E: main (algo_tests.c:422)
+==311== 
+0.43 54544
+Test 12 failed: error, incorrect distance
+Start test 13
+==330== 224 (32 direct, 192 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==330==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==330==    by 0x10958B: board_read_from (algo.c:65)
+==330==    by 0x109F68: test_board_Floyd_Warshall_square (algo_tests.c:312)
+==330==    by 0x10927E: main (algo_tests.c:422)
+==330== 
+0.43 54528
+Test 13 failed: error, incorrect distance
+Start test 14
+==349== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==349==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==349==    by 0x10958B: board_read_from (algo.c:65)
+==349==    by 0x109CC6: test_board_Floyd_Warshall_circle (algo_tests.c:339)
+==349==    by 0x10927E: main (algo_tests.c:422)
+==349== 
+0.43 54544
+Test 14 failed: error, incorrect distance
+Start test 15
+==368== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==368==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==368==    by 0x10958B: board_read_from (algo.c:65)
+==368==    by 0x109B36: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==368==    by 0x10927E: main (algo_tests.c:422)
+==368== 
+0.43 54540
+Test 15 failed: error, incorrect distance
+AIMERIC GARRET
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==424== Invalid read of size 4
+==424==    at 0x48E2B55: fgets (iofgets.c:47)
+==424==    by 0x109802: fgets (stdio2.h:200)
+==424==    by 0x109802: board_read_from (algo.c:81)
+==424==    by 0x10AE47: test_board_null (algo_tests.c:16)
+==424==    by 0x10929E: main (algo_tests.c:422)
+==424==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==424== 
+==424== 
+==424== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==424==  Access not within mapped region at address 0x0
+==424==    at 0x48E2B55: fgets (iofgets.c:47)
+==424==    by 0x109802: fgets (stdio2.h:200)
+==424==    by 0x109802: board_read_from (algo.c:81)
+==424==    by 0x10AE47: test_board_null (algo_tests.c:16)
+==424==    by 0x10929E: main (algo_tests.c:422)
+==424==  If you believe this happened as a result of a stack
+==424==  overflow in your program's main thread (unlikely but
+==424==  possible), you can try to increase the size of the
+==424==  main thread stack using the --main-stacksize= flag.
+==424==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command exited with non-zero status 124
+2.87 54536
+Start test 1
+0.46 54484
+Test 1 failed: error, failure reading board
+Start test 2
+0.43 54472
+Test 2 passed
+Start test 3
+0.42 54412
+Test 3 passed
+Start test 4
+0.43 54532
+Test 4 passed
+Start test 5
+==519== Invalid read of size 8
+==519==    at 0x1099E1: board_read_from (algo.c:147)
+==519==    by 0x10A62E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==519==    by 0x10929E: main (algo_tests.c:422)
+==519==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==519==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==519==    by 0x1098FC: board_read_from (algo.c:117)
+==519==    by 0x10A62E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==519==    by 0x10929E: main (algo_tests.c:422)
+==519== 
+==519== Invalid read of size 8
+==519==    at 0x109A1D: board_read_from (algo.c:148)
+==519==    by 0x10A62E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==519==    by 0x10929E: main (algo_tests.c:422)
+==519==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==519==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==519==    by 0x1098FC: board_read_from (algo.c:117)
+==519==    by 0x10A62E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==519==    by 0x10929E: main (algo_tests.c:422)
+==519== 
+==519== Invalid read of size 8
+==519==    at 0x109A21: board_add_edge_uni (algo.c:71)
+==519==    by 0x109A21: board_read_from (algo.c:148)
+==519==    by 0x10A62E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==519==    by 0x10929E: main (algo_tests.c:422)
+==519==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==519== 
+==519== 
+==519== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==519==  Access not within mapped region at address 0x8
+==519==    at 0x109A21: board_add_edge_uni (algo.c:71)
+==519==    by 0x109A21: board_read_from (algo.c:148)
+==519==    by 0x10A62E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==519==    by 0x10929E: main (algo_tests.c:422)
+==519==  If you believe this happened as a result of a stack
+==519==  overflow in your program's main thread (unlikely but
+==519==  possible), you can try to increase the size of the
+==519==  main thread stack using the --main-stacksize= flag.
+==519==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.50 54532
+Start test 6
+==538== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==538==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==538==    by 0x1098FC: board_read_from (algo.c:117)
+==538==    by 0x10A4FE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==538==    by 0x10929E: main (algo_tests.c:422)
+==538== 
+0.44 54532
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.44 54452
+Test 7 passed
+Start test 8
+0.43 54460
+Test 8 passed
+Start test 9
+==595== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==595==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==595==    by 0x1098FC: board_read_from (algo.c:117)
+==595==    by 0x10ABA6: test_board_is_valid_move_inplace (algo_tests.c:219)
+==595==    by 0x10929E: main (algo_tests.c:422)
+==595== 
+0.43 54460
+Test 9 failed: error, move should be valid
+Start test 10
+0.43 54536
+Test 10 passed
+Start test 11
+0.43 54532
+Test 11 failed: error, failure reading board
+Start test 12
+0.44 54536
+Test 12 passed
+Start test 13
+0.44 54460
+Test 13 passed
+Start test 14
+0.43 54532
+Test 14 passed
+Start test 15
+==709== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==709==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==709==    by 0x1098FC: board_read_from (algo.c:117)
+==709==    by 0x109C66: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==709==    by 0x10929E: main (algo_tests.c:422)
+==709== 
+0.43 54532
+Test 15 failed: error, failure reading board
+AURELIE GEHANT
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==765== Invalid write of size 8
+==765==    at 0x109458: board_create (algo.c:11)
+==765==    by 0x10AE6E: test_board_null (algo_tests.c:15)
+==765==    by 0x1092BE: main (algo_tests.c:422)
+==765==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==765== 
+==765== 
+==765== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==765==  Access not within mapped region at address 0x0
+==765==    at 0x109458: board_create (algo.c:11)
+==765==    by 0x10AE6E: test_board_null (algo_tests.c:15)
+==765==    by 0x1092BE: main (algo_tests.c:422)
+==765==  If you believe this happened as a result of a stack
+==765==  overflow in your program's main thread (unlikely but
+==765==  possible), you can try to increase the size of the
+==765==  main thread stack using the --main-stacksize= flag.
+==765==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.47 54544
+Start test 1
+0.42 54544
+Test 1 passed
+Start test 2
+0.42 54540
+Test 2 passed
+Start test 3
+==822== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==822==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==822==    by 0x1095FA: board_read_from (algo.c:71)
+==822==    by 0x10A806: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==822==    by 0x1092BE: main (algo_tests.c:422)
+==822== 
+0.42 54420
+Test 3 failed: error, success reading incorrect board
+Start test 4
+0.42 54540
+Test 4 passed
+Start test 5
+==860== Invalid read of size 8
+==860==    at 0x10970B: board_read_from (algo.c:112)
+==860==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==860==    by 0x1092BE: main (algo_tests.c:422)
+==860==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==860==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==860==    by 0x1095FA: board_read_from (algo.c:71)
+==860==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==860==    by 0x1092BE: main (algo_tests.c:422)
+==860== 
+==860== Invalid read of size 8
+==860==    at 0x10974C: board_read_from (algo.c:113)
+==860==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==860==    by 0x1092BE: main (algo_tests.c:422)
+==860==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==860==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==860==    by 0x1095FA: board_read_from (algo.c:71)
+==860==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==860==    by 0x1092BE: main (algo_tests.c:422)
+==860== 
+==860== Invalid read of size 8
+==860==    at 0x109750: board_add_edge_uni (algo.c:25)
+==860==    by 0x109750: board_read_from (algo.c:113)
+==860==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==860==    by 0x1092BE: main (algo_tests.c:422)
+==860==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==860== 
+==860== 
+==860== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==860==  Access not within mapped region at address 0x8
+==860==    at 0x109750: board_add_edge_uni (algo.c:25)
+==860==    by 0x109750: board_read_from (algo.c:113)
+==860==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==860==    by 0x1092BE: main (algo_tests.c:422)
+==860==  If you believe this happened as a result of a stack
+==860==  overflow in your program's main thread (unlikely but
+==860==  possible), you can try to increase the size of the
+==860==  main thread stack using the --main-stacksize= flag.
+==860==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.50 54540
+Start test 6
+==879== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==879==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==879==    by 0x1095FA: board_read_from (algo.c:71)
+==879==    by 0x10A52E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==879==    by 0x1092BE: main (algo_tests.c:422)
+==879== 
+0.42 54544
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.44 54544
+Test 7 passed
+Start test 8
+0.43 54544
+Test 8 passed
+Start test 9
+0.43 54544
+Test 9 passed
+Start test 10
+0.43 54540
+Test 10 passed
+Start test 11
+0.43 54420
+Test 11 passed
+Start test 12
+0.43 54376
+Test 12 passed
+Start test 13
+0.43 54540
+Test 13 passed
+Start test 14
+0.43 54540
+Test 14 passed
+Start test 15
+==1050== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==1050==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1050==    by 0x1098DD: board_Floyd_Warshall (algo.c:183)
+==1050==    by 0x109B3F: board_dist (algo.c:243)
+==1050==    by 0x109CD3: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==1050==    by 0x1092BE: main (algo_tests.c:422)
+==1050== 
+==1050== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==1050==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1050==    by 0x1098F0: board_Floyd_Warshall (algo.c:184)
+==1050==    by 0x109B3F: board_dist (algo.c:243)
+==1050==    by 0x109CD3: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==1050==    by 0x1092BE: main (algo_tests.c:422)
+==1050== 
+==1050== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==1050==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1050==    by 0x1095FA: board_read_from (algo.c:71)
+==1050==    by 0x109C96: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==1050==    by 0x1092BE: main (algo_tests.c:422)
+==1050== 
+0.43 54544
+Test 15 failed: error, incorrect distance
+AYMERIC MARIAUX
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==1106== Invalid read of size 4
+==1106==    at 0x48E2B55: fgets (iofgets.c:47)
+==1106==    by 0x1094E2: fgets (stdio2.h:200)
+==1106==    by 0x1094E2: board_read_from (algo.c:34)
+==1106==    by 0x10AFB7: test_board_null (algo_tests.c:16)
+==1106==    by 0x10929E: main (algo_tests.c:422)
+==1106==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==1106== 
+==1106== 
+==1106== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==1106==  Access not within mapped region at address 0x0
+==1106==    at 0x48E2B55: fgets (iofgets.c:47)
+==1106==    by 0x1094E2: fgets (stdio2.h:200)
+==1106==    by 0x1094E2: board_read_from (algo.c:34)
+==1106==    by 0x10AFB7: test_board_null (algo_tests.c:16)
+==1106==    by 0x10929E: main (algo_tests.c:422)
+==1106==  If you believe this happened as a result of a stack
+==1106==  overflow in your program's main thread (unlikely but
+==1106==  possible), you can try to increase the size of the
+==1106==  main thread stack using the --main-stacksize= flag.
+==1106==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.48 54536
+Start test 1
+0.45 54532
+Test 1 passed
+Start test 2
+==1144== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==1144==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1144==    by 0x10959A: board_read_from (algo.c:46)
+==1144==    by 0x10AA15: test_board_read_from_invalid_cops (algo_tests.c:66)
+==1144==    by 0x10929E: main (algo_tests.c:422)
+==1144== 
+0.43 54520
+Test 2 failed: error, success reading incorrect board
+Start test 3
+==1163== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==1163==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1163==    by 0x10959A: board_read_from (algo.c:46)
+==1163==    by 0x10A946: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==1163==    by 0x10929E: main (algo_tests.c:422)
+==1163== 
+0.48 54536
+Test 3 failed: error, success reading incorrect board
+Start test 4
+0.43 54504
+Test 4 passed
+Start test 5
+==1201== Invalid read of size 8
+==1201==    at 0x1096C1: board_read_from (algo.c:70)
+==1201==    by 0x10A79E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==1201==    by 0x10929E: main (algo_tests.c:422)
+==1201==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==1201==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1201==    by 0x10959A: board_read_from (algo.c:46)
+==1201==    by 0x10A79E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==1201==    by 0x10929E: main (algo_tests.c:422)
+==1201== 
+==1201== Invalid read of size 8
+==1201==    at 0x1096FD: board_read_from (algo.c:71)
+==1201==    by 0x10A79E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==1201==    by 0x10929E: main (algo_tests.c:422)
+==1201==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==1201==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1201==    by 0x10959A: board_read_from (algo.c:46)
+==1201==    by 0x10A79E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==1201==    by 0x10929E: main (algo_tests.c:422)
+==1201== 
+==1201== Invalid read of size 8
+==1201==    at 0x109701: board_add_edge_uni (algo.c:24)
+==1201==    by 0x109701: board_read_from (algo.c:71)
+==1201==    by 0x10A79E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==1201==    by 0x10929E: main (algo_tests.c:422)
+==1201==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==1201== 
+==1201== 
+==1201== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==1201==  Access not within mapped region at address 0x8
+==1201==    at 0x109701: board_add_edge_uni (algo.c:24)
+==1201==    by 0x109701: board_read_from (algo.c:71)
+==1201==    by 0x10A79E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==1201==    by 0x10929E: main (algo_tests.c:422)
+==1201==  If you believe this happened as a result of a stack
+==1201==  overflow in your program's main thread (unlikely but
+==1201==  possible), you can try to increase the size of the
+==1201==  main thread stack using the --main-stacksize= flag.
+==1201==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.51 54480
+Start test 6
+==1220== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==1220==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1220==    by 0x10959A: board_read_from (algo.c:46)
+==1220==    by 0x10A66E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==1220==    by 0x10929E: main (algo_tests.c:422)
+==1220== 
+0.43 54536
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54536
+Test 7 passed
+Start test 8
+0.43 54540
+Test 8 passed
+Start test 9
+0.43 54536
+Test 9 passed
+Start test 10
+0.43 54536
+Test 10 passed
+Start test 11
+0.43 54532
+Test 11 passed
+Start test 12
+0.43 54412
+Test 12 passed
+Start test 13
+0.43 54536
+Test 13 passed
+Start test 14
+0.43 54380
+Test 14 passed
+Start test 15
+0.43 54496
+Test 15 passed
+BENJAMIN DUBAIL
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==1447== Invalid read of size 8
+==1447==    at 0x109BDA: board_next (algo.c:320)
+==1447==    by 0x10AEAE: test_board_null (algo_tests.c:21)
+==1447==    by 0x10929E: main (algo_tests.c:422)
+==1447==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==1447== 
+==1447== 
+==1447== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==1447==  Access not within mapped region at address 0x0
+==1447==    at 0x109BDA: board_next (algo.c:320)
+==1447==    by 0x10AEAE: test_board_null (algo_tests.c:21)
+==1447==    by 0x10929E: main (algo_tests.c:422)
+==1447==  If you believe this happened as a result of a stack
+==1447==  overflow in your program's main thread (unlikely but
+==1447==  possible), you can try to increase the size of the
+==1447==  main thread stack using the --main-stacksize= flag.
+==1447==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.48 54544
+Start test 1
+0.43 54540
+Test 1 passed
+Start test 2
+0.42 54544
+Test 2 passed
+Start test 3
+==1504== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==1504==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1504==    by 0x10976F: board_read_from (algo.c:73)
+==1504==    by 0x10A806: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==1504==    by 0x10929E: main (algo_tests.c:422)
+==1504== 
+0.44 54532
+Test 3 failed: error, success reading incorrect board
+Start test 4
+0.43 54468
+Test 4 passed
+Start test 5
+0.43 54544
+Test 5 passed
+Start test 6
+==1561== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==1561==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1561==    by 0x10976F: board_read_from (algo.c:73)
+==1561==    by 0x10A52E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==1561==    by 0x10929E: main (algo_tests.c:422)
+==1561== 
+0.43 54544
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54420
+Test 7 passed
+Start test 8
+0.43 54460
+Test 8 passed
+Start test 9
+==1618== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==1618==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1618==    by 0x10976F: board_read_from (algo.c:73)
+==1618==    by 0x10ABD6: test_board_is_valid_move_inplace (algo_tests.c:219)
+==1618==    by 0x10929E: main (algo_tests.c:422)
+==1618== 
+0.43 54544
+Test 9 failed: error, move should be valid
+Start test 10
+0.43 54540
+Test 10 passed
+Start test 11
+==1656== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==1656==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1656==    by 0x10976F: board_read_from (algo.c:73)
+==1656==    by 0x10A426: test_board_Floyd_Warshall_single (algo_tests.c:264)
+==1656==    by 0x10929E: main (algo_tests.c:422)
+==1656== 
+0.43 54544
+Test 11 failed: error, incorrect distance
+Start test 12
+==1675== 152 (24 direct, 128 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==1675==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1675==    by 0x10976F: board_read_from (algo.c:73)
+==1675==    by 0x10A293: test_board_Floyd_Warshall_chain (algo_tests.c:286)
+==1675==    by 0x10929E: main (algo_tests.c:422)
+==1675== 
+0.43 54460
+Test 12 failed: error, incorrect distance
+Start test 13
+==1694== 224 (32 direct, 192 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==1694==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1694==    by 0x10976F: board_read_from (algo.c:73)
+==1694==    by 0x10A0C8: test_board_Floyd_Warshall_square (algo_tests.c:312)
+==1694==    by 0x10929E: main (algo_tests.c:422)
+==1694== 
+0.43 54544
+Test 13 failed: error, incorrect distance
+Start test 14
+==1713== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==1713==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1713==    by 0x10976F: board_read_from (algo.c:73)
+==1713==    by 0x109E26: test_board_Floyd_Warshall_circle (algo_tests.c:339)
+==1713==    by 0x10929E: main (algo_tests.c:422)
+==1713== 
+0.43 54540
+Test 14 failed: error, incorrect distance
+Start test 15
+==1732== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==1732==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1732==    by 0x10976F: board_read_from (algo.c:73)
+==1732==    by 0x109C96: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==1732==    by 0x10929E: main (algo_tests.c:422)
+==1732== 
+0.42 54544
+Test 15 failed: error, incorrect distance
+BENOIT LITAMPHA
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+0.41 54532
+Test 0 passed
+Start test 1
+0.43 54536
+Test 1 passed
+Start test 2
+0.42 54536
+Test 2 passed
+Start test 3
+0.43 54536
+Test 3 passed
+Start test 4
+0.43 54532
+Test 4 passed
+Start test 5
+0.43 54536
+Test 5 passed
+Start test 6
+==1902== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==1902==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1902==    by 0x109616: board_read_from (algo.c:64)
+==1902==    by 0x10A66E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==1902==    by 0x1092BE: main (algo_tests.c:422)
+==1902== 
+0.43 54536
+Test 6 failed: error, failure reading correct board with autoedge
+Start test 7
+0.43 54436
+Test 7 passed
+Start test 8
+0.43 54432
+Test 8 passed
+Start test 9
+0.43 54532
+Test 9 passed
+Start test 10
+0.44 54532
+Test 10 passed
+Start test 11
+0.43 54536
+Test 11 passed
+Start test 12
+0.43 54532
+Test 12 passed
+Start test 13
+0.43 54536
+Test 13 passed
+Start test 14
+0.43 54536
+Test 14 passed
+Start test 15
+==2073== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==2073==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2073==    by 0x109A74: board_Floyd_Warshall.part.0 (algo.c:185)
+==2073==    by 0x109CC5: board_Floyd_Warshall (algo.c:182)
+==2073==    by 0x109CC5: board_dist (algo.c:238)
+==2073==    by 0x109E13: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==2073==    by 0x1092BE: main (algo_tests.c:422)
+==2073== 
+==2073== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==2073==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2073==    by 0x109A88: board_Floyd_Warshall.part.0 (algo.c:186)
+==2073==    by 0x109CC5: board_Floyd_Warshall (algo.c:182)
+==2073==    by 0x109CC5: board_dist (algo.c:238)
+==2073==    by 0x109E13: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==2073==    by 0x1092BE: main (algo_tests.c:422)
+==2073== 
+==2073== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==2073==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2073==    by 0x109616: board_read_from (algo.c:64)
+==2073==    by 0x109DD6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==2073==    by 0x1092BE: main (algo_tests.c:422)
+==2073== 
+0.43 54412
+Test 15 failed: error, incorrect distance
+CELIAN BRENIAUX
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==2129== Invalid write of size 8
+==2129==    at 0x109438: board_create (algo.c:8)
+==2129==    by 0x10AD8E: test_board_null (algo_tests.c:15)
+==2129==    by 0x10929E: main (algo_tests.c:422)
+==2129==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==2129== 
+==2129== 
+==2129== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==2129==  Access not within mapped region at address 0x0
+==2129==    at 0x109438: board_create (algo.c:8)
+==2129==    by 0x10AD8E: test_board_null (algo_tests.c:15)
+==2129==    by 0x10929E: main (algo_tests.c:422)
+==2129==  If you believe this happened as a result of a stack
+==2129==  overflow in your program's main thread (unlikely but
+==2129==  possible), you can try to increase the size of the
+==2129==  main thread stack using the --main-stacksize= flag.
+==2129==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.47 54540
+Start test 1
+0.43 54544
+Test 1 passed
+Start test 2
+0.42 54540
+Test 2 passed
+Start test 3
+==2186== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==2186==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2186==    by 0x1096BA: board_read_from (algo.c:49)
+==2186==    by 0x10A726: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==2186==    by 0x10929E: main (algo_tests.c:422)
+==2186== 
+0.43 54544
+Test 3 failed: error, success reading incorrect board
+Start test 4
+==2205== Invalid read of size 8
+==2205==    at 0x1094C0: board_destroy (algo.c:106)
+==2205==    by 0x10A68F: test_board_read_from_invalid_vertices (algo_tests.c:110)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205==  Address 0x4a732a0 is 0 bytes inside a block of size 16 free'd
+==2205==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1094F0: board_destroy (algo.c:112)
+==2205==    by 0x109729: board_read_from (algo.c:83)
+==2205==    by 0x10A656: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205==  Block was alloc'd at
+==2205==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1096BA: board_read_from (algo.c:49)
+==2205==    by 0x10A656: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205== 
+==2205== Invalid read of size 8
+==2205==    at 0x1094C9: board_destroy (algo.c:108)
+==2205==    by 0x10A68F: test_board_read_from_invalid_vertices (algo_tests.c:110)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205==  Address 0x4a73300 is 16 bytes inside a block of size 32 free'd
+==2205==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1094DE: board_destroy (algo.c:109)
+==2205==    by 0x109729: board_read_from (algo.c:83)
+==2205==    by 0x10A656: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205==  Block was alloc'd at
+==2205==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1096E7: board_read_from (algo.c:58)
+==2205==    by 0x10A656: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205== 
+==2205== Invalid read of size 8
+==2205==    at 0x1094D6: board_destroy (algo.c:109)
+==2205==    by 0x10A68F: test_board_read_from_invalid_vertices (algo_tests.c:110)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205==  Address 0x4a732a0 is 0 bytes inside a block of size 16 free'd
+==2205==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1094F0: board_destroy (algo.c:112)
+==2205==    by 0x109729: board_read_from (algo.c:83)
+==2205==    by 0x10A656: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205==  Block was alloc'd at
+==2205==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1096BA: board_read_from (algo.c:49)
+==2205==    by 0x10A656: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205== 
+==2205== Invalid free() / delete / delete[] / realloc()
+==2205==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1094DE: board_destroy (algo.c:109)
+==2205==    by 0x10A68F: test_board_read_from_invalid_vertices (algo_tests.c:110)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205==  Address 0x4a732f0 is 0 bytes inside a block of size 32 free'd
+==2205==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1094DE: board_destroy (algo.c:109)
+==2205==    by 0x109729: board_read_from (algo.c:83)
+==2205==    by 0x10A656: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205==  Block was alloc'd at
+==2205==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1096E7: board_read_from (algo.c:58)
+==2205==    by 0x10A656: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205== 
+==2205== Invalid free() / delete / delete[] / realloc()
+==2205==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1094F0: board_destroy (algo.c:112)
+==2205==    by 0x10A68F: test_board_read_from_invalid_vertices (algo_tests.c:110)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205==  Address 0x4a732a0 is 0 bytes inside a block of size 16 free'd
+==2205==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1094F0: board_destroy (algo.c:112)
+==2205==    by 0x109729: board_read_from (algo.c:83)
+==2205==    by 0x10A656: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205==  Block was alloc'd at
+==2205==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2205==    by 0x1096BA: board_read_from (algo.c:49)
+==2205==    by 0x10A656: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==2205==    by 0x10929E: main (algo_tests.c:422)
+==2205== 
+0.43 54544
+Test 4 passed
+Start test 5
+==2224== Invalid read of size 8
+==2224==    at 0x1094C0: board_destroy (algo.c:106)
+==2224==    by 0x10A5B7: test_board_read_from_invalid_edges (algo_tests.c:130)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224==  Address 0x4a732a0 is 0 bytes inside a block of size 16 free'd
+==2224==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1094F0: board_destroy (algo.c:112)
+==2224==    by 0x109729: board_read_from (algo.c:83)
+==2224==    by 0x10A57E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224==  Block was alloc'd at
+==2224==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1096BA: board_read_from (algo.c:49)
+==2224==    by 0x10A57E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224== 
+==2224== Invalid read of size 8
+==2224==    at 0x1094C9: board_destroy (algo.c:108)
+==2224==    by 0x10A5B7: test_board_read_from_invalid_edges (algo_tests.c:130)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224==  Address 0x4a73300 is 16 bytes inside a block of size 32 free'd
+==2224==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1094DE: board_destroy (algo.c:109)
+==2224==    by 0x109729: board_read_from (algo.c:83)
+==2224==    by 0x10A57E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224==  Block was alloc'd at
+==2224==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1096E7: board_read_from (algo.c:58)
+==2224==    by 0x10A57E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224== 
+==2224== Invalid read of size 8
+==2224==    at 0x1094D6: board_destroy (algo.c:109)
+==2224==    by 0x10A5B7: test_board_read_from_invalid_edges (algo_tests.c:130)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224==  Address 0x4a732a0 is 0 bytes inside a block of size 16 free'd
+==2224==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1094F0: board_destroy (algo.c:112)
+==2224==    by 0x109729: board_read_from (algo.c:83)
+==2224==    by 0x10A57E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224==  Block was alloc'd at
+==2224==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1096BA: board_read_from (algo.c:49)
+==2224==    by 0x10A57E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224== 
+==2224== Invalid free() / delete / delete[] / realloc()
+==2224==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1094DE: board_destroy (algo.c:109)
+==2224==    by 0x10A5B7: test_board_read_from_invalid_edges (algo_tests.c:130)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224==  Address 0x4a732f0 is 0 bytes inside a block of size 32 free'd
+==2224==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1094DE: board_destroy (algo.c:109)
+==2224==    by 0x109729: board_read_from (algo.c:83)
+==2224==    by 0x10A57E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224==  Block was alloc'd at
+==2224==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1096E7: board_read_from (algo.c:58)
+==2224==    by 0x10A57E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224== 
+==2224== Invalid free() / delete / delete[] / realloc()
+==2224==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1094F0: board_destroy (algo.c:112)
+==2224==    by 0x10A5B7: test_board_read_from_invalid_edges (algo_tests.c:130)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224==  Address 0x4a732a0 is 0 bytes inside a block of size 16 free'd
+==2224==    at 0x484988F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1094F0: board_destroy (algo.c:112)
+==2224==    by 0x109729: board_read_from (algo.c:83)
+==2224==    by 0x10A57E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224==  Block was alloc'd at
+==2224==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2224==    by 0x1096BA: board_read_from (algo.c:49)
+==2224==    by 0x10A57E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2224==    by 0x10929E: main (algo_tests.c:422)
+==2224== 
+0.42 54544
+Test 5 passed
+Start test 6
+==2243== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==2243==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2243==    by 0x1096BA: board_read_from (algo.c:49)
+==2243==    by 0x10A44E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==2243==    by 0x10929E: main (algo_tests.c:422)
+==2243== 
+0.42 54428
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.42 54540
+Test 7 passed
+Start test 8
+0.43 54324
+Test 8 passed
+Start test 9
+0.42 54540
+Test 9 passed
+Start test 10
+0.43 54544
+Test 10 passed
+Start test 11
+0.43 54420
+Test 11 passed
+Start test 12
+0.43 54416
+Test 12 passed
+Start test 13
+0.43 54540
+Test 13 passed
+Start test 14
+0.43 54540
+Test 14 passed
+Start test 15
+==2414== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==2414==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2414==    by 0x10990C: board_Floyd_Warshall (algo.c:154)
+==2414==    by 0x109AD4: board_dist (algo.c:202)
+==2414==    by 0x109BF3: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==2414==    by 0x10929E: main (algo_tests.c:422)
+==2414== 
+==2414== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==2414==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2414==    by 0x10991B: board_Floyd_Warshall (algo.c:155)
+==2414==    by 0x109AD4: board_dist (algo.c:202)
+==2414==    by 0x109BF3: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==2414==    by 0x10929E: main (algo_tests.c:422)
+==2414== 
+==2414== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==2414==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2414==    by 0x1096BA: board_read_from (algo.c:49)
+==2414==    by 0x109BB6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==2414==    by 0x10929E: main (algo_tests.c:422)
+==2414== 
+0.43 54460
+Test 15 failed: error, incorrect next vertex
+CEM SUCI
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+Indentation problem, diff length is 302
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+0.41 54536
+Test 0 failed: error, non-zero distance on null board
+Start test 1
+0.43 54532
+Test 1 passed
+Start test 2
+0.42 54460
+Test 2 passed
+Start test 3
+0.43 54536
+Test 3 passed
+Start test 4
+0.43 54344
+Test 4 passed
+Start test 5
+0.43 54540
+Test 5 passed
+Start test 6
+==2584== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==2584==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2584==    by 0x1096F6: board_read_from (algo.c:56)
+==2584==    by 0x10A53E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==2584==    by 0x10929E: main (algo_tests.c:422)
+==2584== 
+0.43 54536
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54432
+Test 7 passed
+Start test 8
+0.43 54532
+Test 8 passed
+Start test 9
+0.43 54536
+Test 9 passed
+Start test 10
+0.43 54536
+Test 10 passed
+Start test 11
+0.43 54460
+Test 11 passed
+Start test 12
+0.43 54536
+Test 12 passed
+Start test 13
+0.43 54532
+Test 13 passed
+Start test 14
+0.44 54536
+Test 14 passed
+Start test 15
+==2755== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==2755==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2755==    by 0x109961: board_Floyd_Warshall (algo.c:96)
+==2755==    by 0x109B6D: board_dist (algo.c:129)
+==2755==    by 0x109CE3: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==2755==    by 0x10929E: main (algo_tests.c:422)
+==2755== 
+==2755== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==2755==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2755==    by 0x10997E: board_Floyd_Warshall (algo.c:97)
+==2755==    by 0x109B6D: board_dist (algo.c:129)
+==2755==    by 0x109CE3: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==2755==    by 0x10929E: main (algo_tests.c:422)
+==2755== 
+==2755== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==2755==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2755==    by 0x1096F6: board_read_from (algo.c:56)
+==2755==    by 0x109CA6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==2755==    by 0x10929E: main (algo_tests.c:422)
+==2755== 
+0.43 54536
+Test 15 failed: error, incorrect next vertex
+ELIOT SAUNIER
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==2811== Invalid write of size 8
+==2811==    at 0x109438: board_create (algo.c:10)
+==2811==    by 0x10ADAE: test_board_null (algo_tests.c:15)
+==2811==    by 0x10929E: main (algo_tests.c:422)
+==2811==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==2811== 
+==2811== 
+==2811== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==2811==  Access not within mapped region at address 0x8
+==2811==    at 0x109438: board_create (algo.c:10)
+==2811==    by 0x10ADAE: test_board_null (algo_tests.c:15)
+==2811==    by 0x10929E: main (algo_tests.c:422)
+==2811==  If you believe this happened as a result of a stack
+==2811==  overflow in your program's main thread (unlikely but
+==2811==  possible), you can try to increase the size of the
+==2811==  main thread stack using the --main-stacksize= flag.
+==2811==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.48 54536
+Start test 1
+0.43 54532
+Test 1 passed
+Start test 2
+==2849== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==2849==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2849==    by 0x10959A: board_read_from (algo.c:59)
+==2849==    by 0x10A815: test_board_read_from_invalid_cops (algo_tests.c:66)
+==2849==    by 0x10929E: main (algo_tests.c:422)
+==2849== 
+0.43 54536
+Test 2 failed: error, success reading incorrect board
+Start test 3
+==2868== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==2868==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2868==    by 0x10959A: board_read_from (algo.c:59)
+==2868==    by 0x10A746: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==2868==    by 0x10929E: main (algo_tests.c:422)
+==2868== 
+0.43 54532
+Test 3 failed: error, success reading incorrect board
+Start test 4
+Reading error with code
+0.43 54456
+Test 4 passed
+Start test 5
+==2906== Invalid read of size 8
+==2906==    at 0x1096CA: board_read_from (algo.c:96)
+==2906==    by 0x10A59E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2906==    by 0x10929E: main (algo_tests.c:422)
+==2906==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==2906==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2906==    by 0x10959A: board_read_from (algo.c:59)
+==2906==    by 0x10A59E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2906==    by 0x10929E: main (algo_tests.c:422)
+==2906== 
+==2906== Invalid read of size 8
+==2906==    at 0x109706: board_read_from (algo.c:97)
+==2906==    by 0x10A59E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2906==    by 0x10929E: main (algo_tests.c:422)
+==2906==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==2906==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2906==    by 0x10959A: board_read_from (algo.c:59)
+==2906==    by 0x10A59E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2906==    by 0x10929E: main (algo_tests.c:422)
+==2906== 
+==2906== Invalid read of size 8
+==2906==    at 0x10970A: board_add_edge_uni (algo.c:25)
+==2906==    by 0x10970A: board_read_from (algo.c:97)
+==2906==    by 0x10A59E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2906==    by 0x10929E: main (algo_tests.c:422)
+==2906==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==2906== 
+==2906== 
+==2906== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==2906==  Access not within mapped region at address 0x8
+==2906==    at 0x10970A: board_add_edge_uni (algo.c:25)
+==2906==    by 0x10970A: board_read_from (algo.c:97)
+==2906==    by 0x10A59E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==2906==    by 0x10929E: main (algo_tests.c:422)
+==2906==  If you believe this happened as a result of a stack
+==2906==  overflow in your program's main thread (unlikely but
+==2906==  possible), you can try to increase the size of the
+==2906==  main thread stack using the --main-stacksize= flag.
+==2906==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.51 54524
+Start test 6
+==2925== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==2925==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2925==    by 0x10959A: board_read_from (algo.c:59)
+==2925==    by 0x10A46E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==2925==    by 0x10929E: main (algo_tests.c:422)
+==2925== 
+0.43 54536
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54452
+Test 7 passed
+Start test 8
+0.43 54536
+Test 8 passed
+Start test 9
+==2982== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==2982==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2982==    by 0x10959A: board_read_from (algo.c:59)
+==2982==    by 0x10AB16: test_board_is_valid_move_inplace (algo_tests.c:219)
+==2982==    by 0x10929E: main (algo_tests.c:422)
+==2982== 
+0.44 54536
+Test 9 failed: error, move should be valid
+Start test 10
+0.43 54412
+Test 10 passed
+Start test 11
+0.43 54532
+Test 11 passed
+Start test 12
+0.43 54532
+Test 12 passed
+Start test 13
+0.43 54540
+Test 13 passed
+Start test 14
+0.43 54436
+Test 14 passed
+Start test 15
+0.43 54536
+Test 15 passed
+ELOUAN BOITEUX
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+0.41 54544
+Test 0 passed
+Start test 1
+0.43 54544
+Test 1 passed
+Start test 2
+0.42 54544
+Test 2 passed
+Start test 3
+==3209== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==3209==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3209==    by 0x109610: board_read_from (algo.c:68)
+==3209==    by 0x10A7A6: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==3209==    by 0x10929E: main (algo_tests.c:422)
+==3209== 
+0.43 54420
+Test 3 failed: error, success reading incorrect board
+Start test 4
+0.44 54364
+Test 4 passed
+Start test 5
+0.43 54540
+Test 5 passed
+Start test 6
+==3266== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==3266==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3266==    by 0x109610: board_read_from (algo.c:68)
+==3266==    by 0x10A4CE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==3266==    by 0x10929E: main (algo_tests.c:422)
+==3266== 
+0.43 54548
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54544
+Test 7 passed
+Start test 8
+0.43 54424
+Test 8 passed
+Start test 9
+0.43 54540
+Test 9 passed
+Start test 10
+0.43 54420
+Test 10 passed
+Start test 11
+0.43 54540
+Test 11 passed
+Start test 12
+0.43 54440
+Test 12 passed
+Start test 13
+0.44 54544
+Test 13 passed
+Start test 14
+0.43 54420
+Test 14 passed
+Start test 15
+0.44 54548
+Test 15 passed
+GABIN BOILLON
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==3493== Invalid read of size 4
+==3493==    at 0x48E2B55: fgets (iofgets.c:47)
+==3493==    by 0x109B5E: fgets (stdio2.h:200)
+==3493==    by 0x109B5E: board_read_from (algo.c:134)
+==3493==    by 0x10B1F7: test_board_null (algo_tests.c:16)
+==3493==    by 0x10933E: main (algo_tests.c:422)
+==3493==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==3493== 
+==3493== 
+==3493== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==3493==  Access not within mapped region at address 0x0
+==3493==    at 0x48E2B55: fgets (iofgets.c:47)
+==3493==    by 0x109B5E: fgets (stdio2.h:200)
+==3493==    by 0x109B5E: board_read_from (algo.c:134)
+==3493==    by 0x10B1F7: test_board_null (algo_tests.c:16)
+==3493==    by 0x10933E: main (algo_tests.c:422)
+==3493==  If you believe this happened as a result of a stack
+==3493==  overflow in your program's main thread (unlikely but
+==3493==  possible), you can try to increase the size of the
+==3493==  main thread stack using the --main-stacksize= flag.
+==3493==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.49 54532
+Start test 1
+0.43 54448
+Test 1 passed
+Start test 2
+Invalid format : invalid number of cops.
+0.42 54536
+Test 2 passed
+Start test 3
+Invalid format : invalid number of robbers.
+0.43 54436
+Test 3 passed
+Start test 4
+Invalid format : edges number syntax.
+0.44 54536
+Test 4 passed
+Start test 5
+Invalid format : edges values numbers on line 0.
+0.43 54540
+Test 5 passed
+Start test 6
+==3607== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 8
+==3607==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3607==    by 0x109927: board_Floyd_Warshall (algo.c:312)
+==3607==    by 0x109EA7: board_read_from (algo.c:248)
+==3607==    by 0x10A8AE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==3607==    by 0x10933E: main (algo_tests.c:422)
+==3607== 
+==3607== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 5 of 8
+==3607==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3607==    by 0x10996F: board_Floyd_Warshall (algo.c:317)
+==3607==    by 0x109EA7: board_read_from (algo.c:248)
+==3607==    by 0x10A8AE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==3607==    by 0x10933E: main (algo_tests.c:422)
+==3607== 
+==3607== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 8
+==3607==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3607==    by 0x109C34: board_read_from (algo.c:201)
+==3607==    by 0x10A8AE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==3607==    by 0x10933E: main (algo_tests.c:422)
+==3607== 
+0.43 54508
+Test 6 failed: error, incorrect number of edges
+Start test 7
+==3626== Invalid read of size 8
+==3626==    at 0x1098CF: board_is_valid_move (algo.c:301)
+==3626==    by 0x10B187: test_board_is_valid_move_incorrect (algo_tests.c:174)
+==3626==    by 0x10933E: main (algo_tests.c:422)
+==3626==  Address 0x4a732c8 is 0 bytes after a block of size 40 alloc'd
+==3626==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3626==    by 0x109C34: board_read_from (algo.c:201)
+==3626==    by 0x10B176: test_board_is_valid_move_incorrect (algo_tests.c:173)
+==3626==    by 0x10933E: main (algo_tests.c:422)
+==3626== 
+0.43 54536
+Test 7 passed
+Start test 8
+0.44 54532
+Test 8 passed
+Start test 9
+0.43 54536
+Test 9 passed
+Start test 10
+0.44 54536
+Test 10 passed
+Start test 11
+0.48 54528
+Test 11 passed
+Start test 12
+0.44 54532
+Test 12 passed
+Start test 13
+0.43 54536
+Test 13 passed
+Start test 14
+0.44 54536
+Test 14 passed
+Start test 15
+0.43 54536
+Test 15 passed
+HUGO GUEDES DA SILVA SANTOS
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==3834== Invalid read of size 8
+==3834==    at 0x1098DA: board_Floyd_Warshall (algo.c:191)
+==3834==    by 0x10AD15: test_board_null (algo_tests.c:19)
+==3834==    by 0x10929E: main (algo_tests.c:422)
+==3834==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==3834== 
+==3834== 
+==3834== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==3834==  Access not within mapped region at address 0x0
+==3834==    at 0x1098DA: board_Floyd_Warshall (algo.c:191)
+==3834==    by 0x10AD15: test_board_null (algo_tests.c:19)
+==3834==    by 0x10929E: main (algo_tests.c:422)
+==3834==  If you believe this happened as a result of a stack
+==3834==  overflow in your program's main thread (unlikely but
+==3834==  possible), you can try to increase the size of the
+==3834==  main thread stack using the --main-stacksize= flag.
+==3834==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.48 54532
+Start test 1
+0.43 54532
+Test 1 passed
+Start test 2
+0.43 54536
+Test 2 passed
+Start test 3
+0.43 54532
+Test 3 passed
+Start test 4
+0.44 54412
+Test 4 passed
+Start test 5
+0.43 54536
+Test 5 passed
+Start test 6
+==3948== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==3948==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3948==    by 0x1095FE: board_read_from (algo.c:82)
+==3948==    by 0x10A3AE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==3948==    by 0x10929E: main (algo_tests.c:422)
+==3948== 
+0.45 54532
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.44 54512
+Test 7 passed
+Start test 8
+0.44 54420
+Test 8 passed
+Start test 9
+0.46 54536
+Test 9 passed
+Start test 10
+0.43 54536
+Test 10 passed
+Start test 11
+==4043== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==4043==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4043==    by 0x1095FE: board_read_from (algo.c:82)
+==4043==    by 0x10A2A6: test_board_Floyd_Warshall_single (algo_tests.c:264)
+==4043==    by 0x10929E: main (algo_tests.c:422)
+==4043== 
+0.45 54532
+Test 11 failed: error, incorrect distance
+Start test 12
+==4062== 152 (24 direct, 128 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==4062==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4062==    by 0x1095FE: board_read_from (algo.c:82)
+==4062==    by 0x10A113: test_board_Floyd_Warshall_chain (algo_tests.c:286)
+==4062==    by 0x10929E: main (algo_tests.c:422)
+==4062== 
+0.43 54364
+Test 12 failed: error, incorrect distance
+Start test 13
+==4081== 224 (32 direct, 192 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==4081==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4081==    by 0x1095FE: board_read_from (algo.c:82)
+==4081==    by 0x109F48: test_board_Floyd_Warshall_square (algo_tests.c:312)
+==4081==    by 0x10929E: main (algo_tests.c:422)
+==4081== 
+0.43 54536
+Test 13 failed: error, incorrect distance
+Start test 14
+==4100== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==4100==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4100==    by 0x1095FE: board_read_from (algo.c:82)
+==4100==    by 0x109CA6: test_board_Floyd_Warshall_circle (algo_tests.c:339)
+==4100==    by 0x10929E: main (algo_tests.c:422)
+==4100== 
+0.43 54536
+Test 14 failed: error, incorrect distance
+Start test 15
+==4119== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==4119==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4119==    by 0x1095FE: board_read_from (algo.c:82)
+==4119==    by 0x109B16: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==4119==    by 0x10929E: main (algo_tests.c:422)
+==4119== 
+0.45 54504
+Test 15 failed: error, incorrect distance
+JASSEM NAGAZ
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+Indentation problem, diff length is 7
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+0.41 54540
+Test 0 failed: error, non-zero distance on null board
+Start test 1
+0.43 54540
+Test 1 passed
+Start test 2
+0.42 54540
+Test 2 passed
+Start test 3
+==4232== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==4232==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4232==    by 0x1095E7: board_read_from (algo.c:75)
+==4232==    by 0x10A736: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==4232==    by 0x10929E: main (algo_tests.c:422)
+==4232== 
+0.43 54544
+Test 3 failed: error, success reading incorrect board
+Start test 4
+0.43 54540
+Test 4 passed
+Start test 5
+==4270== Invalid read of size 8
+==4270==    at 0x1096DA: board_read_from (algo.c:109)
+==4270==    by 0x10A58E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4270==    by 0x10929E: main (algo_tests.c:422)
+==4270==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==4270==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4270==    by 0x1095E7: board_read_from (algo.c:75)
+==4270==    by 0x10A58E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4270==    by 0x10929E: main (algo_tests.c:422)
+==4270== 
+==4270== Invalid read of size 8
+==4270==    at 0x10971A: board_read_from (algo.c:110)
+==4270==    by 0x10A58E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4270==    by 0x10929E: main (algo_tests.c:422)
+==4270==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==4270==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4270==    by 0x1095E7: board_read_from (algo.c:75)
+==4270==    by 0x10A58E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4270==    by 0x10929E: main (algo_tests.c:422)
+==4270== 
+==4270== Invalid read of size 8
+==4270==    at 0x10971E: board_add_edge_uni (algo.c:24)
+==4270==    by 0x10971E: board_read_from (algo.c:110)
+==4270==    by 0x10A58E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4270==    by 0x10929E: main (algo_tests.c:422)
+==4270==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==4270== 
+==4270== 
+==4270== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==4270==  Access not within mapped region at address 0x8
+==4270==    at 0x10971E: board_add_edge_uni (algo.c:24)
+==4270==    by 0x10971E: board_read_from (algo.c:110)
+==4270==    by 0x10A58E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4270==    by 0x10929E: main (algo_tests.c:422)
+==4270==  If you believe this happened as a result of a stack
+==4270==  overflow in your program's main thread (unlikely but
+==4270==  possible), you can try to increase the size of the
+==4270==  main thread stack using the --main-stacksize= flag.
+==4270==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.52 54544
+Start test 6
+==4289== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==4289==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4289==    by 0x1095E7: board_read_from (algo.c:75)
+==4289==    by 0x10A45E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==4289==    by 0x10929E: main (algo_tests.c:422)
+==4289== 
+0.50 54548
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.44 54480
+Test 7 passed
+Start test 8
+0.44 54544
+Test 8 passed
+Start test 9
+0.43 54540
+Test 9 passed
+Start test 10
+0.45 54548
+Test 10 passed
+Start test 11
+==4384== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==4384==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4384==    by 0x1095E7: board_read_from (algo.c:75)
+==4384==    by 0x10A356: test_board_Floyd_Warshall_single (algo_tests.c:264)
+==4384==    by 0x10929E: main (algo_tests.c:422)
+==4384== 
+0.44 54428
+Test 11 failed: error, incorrect distance
+Start test 12
+==4403== 152 (24 direct, 128 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==4403==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4403==    by 0x1095E7: board_read_from (algo.c:75)
+==4403==    by 0x10A1C3: test_board_Floyd_Warshall_chain (algo_tests.c:286)
+==4403==    by 0x10929E: main (algo_tests.c:422)
+==4403== 
+0.44 54544
+Test 12 failed: error, incorrect distance
+Start test 13
+==4422== 224 (32 direct, 192 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==4422==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4422==    by 0x1095E7: board_read_from (algo.c:75)
+==4422==    by 0x109FF8: test_board_Floyd_Warshall_square (algo_tests.c:312)
+==4422==    by 0x10929E: main (algo_tests.c:422)
+==4422== 
+0.43 54540
+Test 13 failed: error, incorrect distance
+Start test 14
+==4441== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==4441==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4441==    by 0x1095E7: board_read_from (algo.c:75)
+==4441==    by 0x109D56: test_board_Floyd_Warshall_circle (algo_tests.c:339)
+==4441==    by 0x10929E: main (algo_tests.c:422)
+==4441== 
+0.44 54540
+Test 14 failed: error, incorrect distance
+Start test 15
+==4460== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==4460==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4460==    by 0x1095E7: board_read_from (algo.c:75)
+==4460==    by 0x109BC6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==4460==    by 0x10929E: main (algo_tests.c:422)
+==4460== 
+0.44 54532
+Test 15 failed: error, incorrect distance
+JULES COTTIER
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==4516== Invalid read of size 4
+==4516==    at 0x48E2B55: fgets (iofgets.c:47)
+==4516==    by 0x1094E2: fgets (stdio2.h:200)
+==4516==    by 0x1094E2: board_read_from (algo.c:36)
+==4516==    by 0x10AE37: test_board_null (algo_tests.c:16)
+==4516==    by 0x10929E: main (algo_tests.c:422)
+==4516==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==4516== 
+==4516== 
+==4516== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==4516==  Access not within mapped region at address 0x0
+==4516==    at 0x48E2B55: fgets (iofgets.c:47)
+==4516==    by 0x1094E2: fgets (stdio2.h:200)
+==4516==    by 0x1094E2: board_read_from (algo.c:36)
+==4516==    by 0x10AE37: test_board_null (algo_tests.c:16)
+==4516==    by 0x10929E: main (algo_tests.c:422)
+==4516==  If you believe this happened as a result of a stack
+==4516==  overflow in your program's main thread (unlikely but
+==4516==  possible), you can try to increase the size of the
+==4516==  main thread stack using the --main-stacksize= flag.
+==4516==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.58 54420
+Start test 1
+0.44 54540
+Test 1 failed: error, failure reading board
+Start test 2
+0.42 54476
+Test 2 passed
+Start test 3
+0.44 54540
+Test 3 passed
+Start test 4
+0.47 54400
+Test 4 passed
+Start test 5
+==4611== Invalid read of size 8
+==4611==    at 0x1096C1: board_read_from (algo.c:113)
+==4611==    by 0x10A61E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4611==    by 0x10929E: main (algo_tests.c:422)
+==4611==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==4611==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4611==    by 0x1095DC: board_read_from (algo.c:80)
+==4611==    by 0x10A61E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4611==    by 0x10929E: main (algo_tests.c:422)
+==4611== 
+==4611== Invalid read of size 8
+==4611==    at 0x1096FD: board_read_from (algo.c:114)
+==4611==    by 0x10A61E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4611==    by 0x10929E: main (algo_tests.c:422)
+==4611==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==4611==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4611==    by 0x1095DC: board_read_from (algo.c:80)
+==4611==    by 0x10A61E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4611==    by 0x10929E: main (algo_tests.c:422)
+==4611== 
+==4611== Invalid read of size 8
+==4611==    at 0x109701: board_add_edge_uni (algo.c:24)
+==4611==    by 0x109701: board_read_from (algo.c:114)
+==4611==    by 0x10A61E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4611==    by 0x10929E: main (algo_tests.c:422)
+==4611==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==4611== 
+==4611== 
+==4611== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==4611==  Access not within mapped region at address 0x8
+==4611==    at 0x109701: board_add_edge_uni (algo.c:24)
+==4611==    by 0x109701: board_read_from (algo.c:114)
+==4611==    by 0x10A61E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4611==    by 0x10929E: main (algo_tests.c:422)
+==4611==  If you believe this happened as a result of a stack
+==4611==  overflow in your program's main thread (unlikely but
+==4611==  possible), you can try to increase the size of the
+==4611==  main thread stack using the --main-stacksize= flag.
+==4611==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.58 54540
+Start test 6
+==4630== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==4630==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4630==    by 0x1095DC: board_read_from (algo.c:80)
+==4630==    by 0x10A4EE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==4630==    by 0x10929E: main (algo_tests.c:422)
+==4630== 
+0.44 54540
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.44 54360
+Test 7 passed
+Start test 8
+0.43 54468
+Test 8 passed
+Start test 9
+==4687== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==4687==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4687==    by 0x1095DC: board_read_from (algo.c:80)
+==4687==    by 0x10AB96: test_board_is_valid_move_inplace (algo_tests.c:219)
+==4687==    by 0x10929E: main (algo_tests.c:422)
+==4687== 
+0.43 54544
+Test 9 failed: error, move should be valid
+Start test 10
+0.43 54544
+Test 10 passed
+Start test 11
+0.43 54544
+Test 11 failed: error, failure reading board
+Start test 12
+0.43 54524
+Test 12 passed
+Start test 13
+0.45 54540
+Test 13 passed
+Start test 14
+0.45 54544
+Test 14 passed
+Start test 15
+==4801== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==4801==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4801==    by 0x1095DC: board_read_from (algo.c:80)
+==4801==    by 0x109C56: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==4801==    by 0x10929E: main (algo_tests.c:422)
+==4801== 
+0.43 54484
+Test 15 failed: error, failure reading board
+KILLIAN MATHIAS
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==4857== Invalid write of size 8
+==4857==    at 0x109438: board_create (algo.c:7)
+==4857==    by 0x10AD6E: test_board_null (algo_tests.c:15)
+==4857==    by 0x10929E: main (algo_tests.c:422)
+==4857==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==4857== 
+==4857== 
+==4857== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==4857==  Access not within mapped region at address 0x0
+==4857==    at 0x109438: board_create (algo.c:7)
+==4857==    by 0x10AD6E: test_board_null (algo_tests.c:15)
+==4857==    by 0x10929E: main (algo_tests.c:422)
+==4857==  If you believe this happened as a result of a stack
+==4857==  overflow in your program's main thread (unlikely but
+==4857==  possible), you can try to increase the size of the
+==4857==  main thread stack using the --main-stacksize= flag.
+==4857==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.51 54532
+Start test 1
+0.43 54544
+Test 1 passed
+Start test 2
+==4895== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==4895==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4895==    by 0x109599: board_read_from (algo.c:44)
+==4895==    by 0x10A7D5: test_board_read_from_invalid_cops (algo_tests.c:66)
+==4895==    by 0x10929E: main (algo_tests.c:422)
+==4895== 
+0.43 54544
+Test 2 failed: error, success reading incorrect board
+Start test 3
+==4914== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==4914==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4914==    by 0x109599: board_read_from (algo.c:44)
+==4914==    by 0x10A706: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==4914==    by 0x10929E: main (algo_tests.c:422)
+==4914== 
+0.43 54440
+Test 3 failed: error, success reading incorrect board
+Start test 4
+0.43 54548
+Test 4 passed
+Start test 5
+==4952== Invalid read of size 8
+==4952==    at 0x1096B1: board_read_from (algo.c:64)
+==4952==    by 0x10A55E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4952==    by 0x10929E: main (algo_tests.c:422)
+==4952==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==4952==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4952==    by 0x109599: board_read_from (algo.c:44)
+==4952==    by 0x10A55E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4952==    by 0x10929E: main (algo_tests.c:422)
+==4952== 
+==4952== Invalid read of size 8
+==4952==    at 0x1096ED: board_read_from (algo.c:65)
+==4952==    by 0x10A55E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4952==    by 0x10929E: main (algo_tests.c:422)
+==4952==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==4952==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4952==    by 0x109599: board_read_from (algo.c:44)
+==4952==    by 0x10A55E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4952==    by 0x10929E: main (algo_tests.c:422)
+==4952== 
+==4952== Invalid read of size 8
+==4952==    at 0x1096F1: board_add_edge_uni (algo.c:21)
+==4952==    by 0x1096F1: board_read_from (algo.c:65)
+==4952==    by 0x10A55E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4952==    by 0x10929E: main (algo_tests.c:422)
+==4952==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==4952== 
+==4952== 
+==4952== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==4952==  Access not within mapped region at address 0x8
+==4952==    at 0x1096F1: board_add_edge_uni (algo.c:21)
+==4952==    by 0x1096F1: board_read_from (algo.c:65)
+==4952==    by 0x10A55E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==4952==    by 0x10929E: main (algo_tests.c:422)
+==4952==  If you believe this happened as a result of a stack
+==4952==  overflow in your program's main thread (unlikely but
+==4952==  possible), you can try to increase the size of the
+==4952==  main thread stack using the --main-stacksize= flag.
+==4952==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.50 54544
+Start test 6
+==4971== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==4971==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4971==    by 0x109599: board_read_from (algo.c:44)
+==4971==    by 0x10A42E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==4971==    by 0x10929E: main (algo_tests.c:422)
+==4971== 
+0.43 54540
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54540
+Test 7 passed
+Start test 8
+0.44 54540
+Test 8 passed
+Start test 9
+0.43 54468
+Test 9 passed
+Start test 10
+0.43 54540
+Test 10 passed
+Start test 11
+0.43 54536
+Test 11 passed
+Start test 12
+0.43 54548
+Test 12 passed
+Start test 13
+0.43 54544
+Test 13 passed
+Start test 14
+0.43 54540
+Test 14 passed
+Start test 15
+==5142== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==5142==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5142==    by 0x1098C0: board_Floyd_Warshall (algo.c:134)
+==5142==    by 0x109ABF: board_dist (algo.c:185)
+==5142==    by 0x109BD3: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==5142==    by 0x10929E: main (algo_tests.c:422)
+==5142== 
+==5142== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==5142==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5142==    by 0x1098CF: board_Floyd_Warshall (algo.c:135)
+==5142==    by 0x109ABF: board_dist (algo.c:185)
+==5142==    by 0x109BD3: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==5142==    by 0x10929E: main (algo_tests.c:422)
+==5142== 
+==5142== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==5142==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5142==    by 0x109599: board_read_from (algo.c:44)
+==5142==    by 0x109B96: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==5142==    by 0x10929E: main (algo_tests.c:422)
+==5142== 
+0.43 54544
+Test 15 failed: error, incorrect next vertex
+LAMINE TOURE
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+algo.c: In function 'board_read_from':
+algo.c:80:7: warning: ignoring return value of 'fgets' declared with attribute 'warn_unused_result' [-Wunused-result]
+   80 |       fgets (line, sizeof (line), file);
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+algo.c:83:3: warning: ignoring return value of 'fgets' declared with attribute 'warn_unused_result' [-Wunused-result]
+   83 |   fgets (line, sizeof (line), file);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+algo.c:88:7: warning: ignoring return value of 'fgets' declared with attribute 'warn_unused_result' [-Wunused-result]
+   88 |       fgets (line, sizeof (line), file);
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Start test 0
+==5198== Invalid write of size 8
+==5198==    at 0x109658: board_create (algo.c:8)
+==5198==    by 0x10AE0E: test_board_null (algo_tests.c:15)
+==5198==    by 0x10929E: main (algo_tests.c:422)
+==5198==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==5198== 
+==5198== 
+==5198== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==5198==  Access not within mapped region at address 0x0
+==5198==    at 0x109658: board_create (algo.c:8)
+==5198==    by 0x10AE0E: test_board_null (algo_tests.c:15)
+==5198==    by 0x10929E: main (algo_tests.c:422)
+==5198==  If you believe this happened as a result of a stack
+==5198==  overflow in your program's main thread (unlikely but
+==5198==  possible), you can try to increase the size of the
+==5198==  main thread stack using the --main-stacksize= flag.
+==5198==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.48 54540
+Start test 1
+0.43 54544
+Test 1 passed
+Start test 2
+0.42 54544
+Test 2 passed
+Start test 3
+==5255== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==5255==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5255==    by 0x109803: board_read_from (algo.c:73)
+==5255==    by 0x10A7A6: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==5255==    by 0x10929E: main (algo_tests.c:422)
+==5255== 
+0.43 54544
+Test 3 failed: error, success reading incorrect board
+Start test 4
+==5274== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==5274==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5274==    by 0x109803: board_read_from (algo.c:73)
+==5274==    by 0x10A6D6: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==5274==    by 0x10929E: main (algo_tests.c:422)
+==5274== 
+0.44 54544
+Test 4 failed: error, success reading incorrect board
+Start test 5
+==5293== Invalid read of size 8
+==5293==    at 0x1098E8: board_read_from (algo.c:90)
+==5293==    by 0x10A5FE: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5293==    by 0x10929E: main (algo_tests.c:422)
+==5293==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==5293==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5293==    by 0x109803: board_read_from (algo.c:73)
+==5293==    by 0x10A5FE: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5293==    by 0x10929E: main (algo_tests.c:422)
+==5293== 
+==5293== Invalid read of size 8
+==5293==    at 0x10992E: board_read_from (algo.c:91)
+==5293==    by 0x10A5FE: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5293==    by 0x10929E: main (algo_tests.c:422)
+==5293==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==5293==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5293==    by 0x109803: board_read_from (algo.c:73)
+==5293==    by 0x10A5FE: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5293==    by 0x10929E: main (algo_tests.c:422)
+==5293== 
+==5293== Invalid read of size 8
+==5293==    at 0x109932: board_add_edge_uni (algo.c:22)
+==5293==    by 0x109932: board_read_from (algo.c:91)
+==5293==    by 0x10A5FE: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5293==    by 0x10929E: main (algo_tests.c:422)
+==5293==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==5293== 
+==5293== 
+==5293== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==5293==  Access not within mapped region at address 0x8
+==5293==    at 0x109932: board_add_edge_uni (algo.c:22)
+==5293==    by 0x109932: board_read_from (algo.c:91)
+==5293==    by 0x10A5FE: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5293==    by 0x10929E: main (algo_tests.c:422)
+==5293==  If you believe this happened as a result of a stack
+==5293==  overflow in your program's main thread (unlikely but
+==5293==  possible), you can try to increase the size of the
+==5293==  main thread stack using the --main-stacksize= flag.
+==5293==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.55 54544
+Start test 6
+==5312== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==5312==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5312==    by 0x109803: board_read_from (algo.c:73)
+==5312==    by 0x10A4CE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==5312==    by 0x10929E: main (algo_tests.c:422)
+==5312== 
+0.43 54540
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54544
+Test 7 passed
+Start test 8
+0.43 54540
+Test 8 passed
+Start test 9
+==5369== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==5369==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5369==    by 0x109803: board_read_from (algo.c:73)
+==5369==    by 0x10AB76: test_board_is_valid_move_inplace (algo_tests.c:219)
+==5369==    by 0x10929E: main (algo_tests.c:422)
+==5369== 
+0.43 54416
+Test 9 failed: error, move should be valid
+Start test 10
+0.43 54540
+Test 10 passed
+Start test 11
+0.43 54424
+Test 11 passed
+Start test 12
+0.43 54544
+Test 12 passed
+Start test 13
+0.43 54544
+Test 13 passed
+Start test 14
+0.43 54544
+Test 14 passed
+Start test 15
+==5483== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==5483==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5483==    by 0x1094AF: board_Floyd_Warshall.part.0 (algo.c:172)
+==5483==    by 0x109B37: board_Floyd_Warshall (algo.c:157)
+==5483==    by 0x109B37: board_dist (algo.c:230)
+==5483==    by 0x109C87: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==5483==    by 0x10929E: main (algo_tests.c:422)
+==5483== 
+==5483== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==5483==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5483==    by 0x1094BE: board_Floyd_Warshall.part.0 (algo.c:173)
+==5483==    by 0x109B37: board_Floyd_Warshall (algo.c:157)
+==5483==    by 0x109B37: board_dist (algo.c:230)
+==5483==    by 0x109C87: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==5483==    by 0x10929E: main (algo_tests.c:422)
+==5483== 
+==5483== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==5483==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5483==    by 0x109803: board_read_from (algo.c:73)
+==5483==    by 0x109C36: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==5483==    by 0x10929E: main (algo_tests.c:422)
+==5483== 
+0.43 54520
+Test 15 failed: error, incorrect distance
+MAEL HENRIET
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+Indentation problem, diff length is 79
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+0.41 54532
+Test 0 failed: error, non-zero distance on null board
+Start test 1
+0.44 54536
+Test 1 passed
+Start test 2
+0.42 54520
+Test 2 passed
+Start test 3
+==5596== 12 (8 direct, 4 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==5596==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5596==    by 0x10966C: board_Floyd_Warshall (algo.c:191)
+==5596==    by 0x109B9F: board_read_from (algo.c:112)
+==5596==    by 0x10A826: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==5596==    by 0x10929E: main (algo_tests.c:422)
+==5596== 
+==5596== 16 (8 direct, 8 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==5596==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5596==    by 0x10967B: board_Floyd_Warshall (algo.c:192)
+==5596==    by 0x109B9F: board_read_from (algo.c:112)
+==5596==    by 0x10A826: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==5596==    by 0x10929E: main (algo_tests.c:422)
+==5596== 
+==5596== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==5596==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5596==    by 0x109A31: board_read_from (algo.c:59)
+==5596==    by 0x10A826: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==5596==    by 0x10929E: main (algo_tests.c:422)
+==5596== 
+0.43 54532
+Test 3 failed: error, success reading incorrect board
+Start test 4
+0.43 54532
+Test 4 passed
+Start test 5
+0.44 54532
+Test 5 passed
+Start test 6
+==5653== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 8
+==5653==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5653==    by 0x10966C: board_Floyd_Warshall (algo.c:191)
+==5653==    by 0x109B9F: board_read_from (algo.c:112)
+==5653==    by 0x10A54E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==5653==    by 0x10929E: main (algo_tests.c:422)
+==5653== 
+==5653== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 5 of 8
+==5653==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5653==    by 0x10967B: board_Floyd_Warshall (algo.c:192)
+==5653==    by 0x109B9F: board_read_from (algo.c:112)
+==5653==    by 0x10A54E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==5653==    by 0x10929E: main (algo_tests.c:422)
+==5653== 
+==5653== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 8
+==5653==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5653==    by 0x109A31: board_read_from (algo.c:59)
+==5653==    by 0x10A54E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==5653==    by 0x10929E: main (algo_tests.c:422)
+==5653== 
+0.43 54532
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.44 54536
+Test 7 passed
+Start test 8
+0.44 54536
+Test 8 passed
+Start test 9
+==5710== 140 (40 direct, 100 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 9
+==5710==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5710==    by 0x10966C: board_Floyd_Warshall (algo.c:191)
+==5710==    by 0x109B9F: board_read_from (algo.c:112)
+==5710==    by 0x10ABF6: test_board_is_valid_move_inplace (algo_tests.c:219)
+==5710==    by 0x10929E: main (algo_tests.c:422)
+==5710== 
+==5710== 240 (40 direct, 200 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 9
+==5710==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5710==    by 0x10967B: board_Floyd_Warshall (algo.c:192)
+==5710==    by 0x109B9F: board_read_from (algo.c:112)
+==5710==    by 0x10ABF6: test_board_is_valid_move_inplace (algo_tests.c:219)
+==5710==    by 0x10929E: main (algo_tests.c:422)
+==5710== 
+==5710== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 8 of 9
+==5710==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5710==    by 0x109A31: board_read_from (algo.c:59)
+==5710==    by 0x10ABF6: test_board_is_valid_move_inplace (algo_tests.c:219)
+==5710==    by 0x10929E: main (algo_tests.c:422)
+==5710== 
+0.44 54412
+Test 9 failed: error, move should be valid
+Start test 10
+0.45 54412
+Test 10 passed
+Start test 11
+0.43 54532
+Test 11 passed
+Start test 12
+0.48 54536
+Test 12 passed
+Start test 13
+0.43 54536
+Test 13 passed
+Start test 14
+0.44 54472
+Test 14 passed
+Start test 15
+==5824== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==5824==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5824==    by 0x10966C: board_Floyd_Warshall (algo.c:191)
+==5824==    by 0x109B9F: board_read_from (algo.c:112)
+==5824==    by 0x109CB6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==5824==    by 0x10929E: main (algo_tests.c:422)
+==5824== 
+==5824== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==5824==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5824==    by 0x10967B: board_Floyd_Warshall (algo.c:192)
+==5824==    by 0x109B9F: board_read_from (algo.c:112)
+==5824==    by 0x109CB6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==5824==    by 0x10929E: main (algo_tests.c:422)
+==5824== 
+==5824== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==5824==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5824==    by 0x109A31: board_read_from (algo.c:59)
+==5824==    by 0x109CB6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==5824==    by 0x10929E: main (algo_tests.c:422)
+==5824== 
+0.43 54532
+Test 15 failed: error, incorrect distance
+MUHAMMED COSKUN
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+0.41 54540
+Test 0 failed: error, non-zero distance on null board
+Start test 1
+0.43 54540
+Test 1 passed
+Start test 2
+0.42 54544
+Test 2 passed
+Start test 3
+==5937== 12 (8 direct, 4 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==5937==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5937==    by 0x109B07: board_read_from (algo.c:152)
+==5937==    by 0x10A806: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==5937==    by 0x10929E: main (algo_tests.c:422)
+==5937== 
+==5937== 16 (8 direct, 8 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==5937==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5937==    by 0x109B16: board_read_from (algo.c:153)
+==5937==    by 0x10A806: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==5937==    by 0x10929E: main (algo_tests.c:422)
+==5937== 
+==5937== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==5937==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5937==    by 0x1099C2: board_read_from (algo.c:106)
+==5937==    by 0x10A806: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==5937==    by 0x10929E: main (algo_tests.c:422)
+==5937== 
+0.43 54544
+Test 3 failed: error, success reading incorrect board
+Start test 4
+0.43 54540
+Test 4 passed
+Start test 5
+==5975== Invalid read of size 8
+==5975==    at 0x109ABC: board_read_from (algo.c:145)
+==5975==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5975==    by 0x10929E: main (algo_tests.c:422)
+==5975==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==5975==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5975==    by 0x1099C2: board_read_from (algo.c:106)
+==5975==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5975==    by 0x10929E: main (algo_tests.c:422)
+==5975== 
+==5975== Invalid read of size 8
+==5975==    at 0x109AE0: board_read_from (algo.c:146)
+==5975==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5975==    by 0x10929E: main (algo_tests.c:422)
+==5975==  Address 0x4a732b0 is 0 bytes after a block of size 16 alloc'd
+==5975==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5975==    by 0x1099C2: board_read_from (algo.c:106)
+==5975==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5975==    by 0x10929E: main (algo_tests.c:422)
+==5975== 
+==5975== Invalid read of size 8
+==5975==    at 0x109560: board_add_edge_uni (algo.c:35)
+==5975==    by 0x109AE8: board_read_from (algo.c:146)
+==5975==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5975==    by 0x10929E: main (algo_tests.c:422)
+==5975==  Address 0x8 is not stack'd, malloc'd or (recently) free'd
+==5975== 
+==5975== 
+==5975== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==5975==  Access not within mapped region at address 0x8
+==5975==    at 0x109560: board_add_edge_uni (algo.c:35)
+==5975==    by 0x109AE8: board_read_from (algo.c:146)
+==5975==    by 0x10A65E: test_board_read_from_invalid_edges (algo_tests.c:126)
+==5975==    by 0x10929E: main (algo_tests.c:422)
+==5975==  If you believe this happened as a result of a stack
+==5975==  overflow in your program's main thread (unlikely but
+==5975==  possible), you can try to increase the size of the
+==5975==  main thread stack using the --main-stacksize= flag.
+==5975==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.50 54544
+Start test 6
+==5994== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 8
+==5994==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5994==    by 0x109B07: board_read_from (algo.c:152)
+==5994==    by 0x10A52E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==5994==    by 0x10929E: main (algo_tests.c:422)
+==5994== 
+==5994== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 5 of 8
+==5994==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5994==    by 0x109B16: board_read_from (algo.c:153)
+==5994==    by 0x10A52E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==5994==    by 0x10929E: main (algo_tests.c:422)
+==5994== 
+==5994== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 8
+==5994==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5994==    by 0x1099C2: board_read_from (algo.c:106)
+==5994==    by 0x10A52E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==5994==    by 0x10929E: main (algo_tests.c:422)
+==5994== 
+0.43 54544
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54544
+Test 7 passed
+Start test 8
+0.43 54420
+Test 8 passed
+Start test 9
+0.43 54420
+Test 9 passed
+Start test 10
+0.43 54548
+Test 10 passed
+Start test 11
+0.43 54544
+Test 11 passed
+Start test 12
+0.43 54540
+Test 12 passed
+Start test 13
+0.43 54544
+Test 13 passed
+Start test 14
+0.43 54544
+Test 14 passed
+Start test 15
+0.44 54540
+Test 15 passed
+RYAN LOUREAU
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+Indentation problem, diff length is 248
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==6221== Invalid write of size 8
+==6221==    at 0x109438: board_create (algo.c:11)
+==6221==    by 0x10AD1E: test_board_null (algo_tests.c:15)
+==6221==    by 0x10929E: main (algo_tests.c:422)
+==6221==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==6221== 
+==6221== 
+==6221== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==6221==  Access not within mapped region at address 0x0
+==6221==    at 0x109438: board_create (algo.c:11)
+==6221==    by 0x10AD1E: test_board_null (algo_tests.c:15)
+==6221==    by 0x10929E: main (algo_tests.c:422)
+==6221==  If you believe this happened as a result of a stack
+==6221==  overflow in your program's main thread (unlikely but
+==6221==  possible), you can try to increase the size of the
+==6221==  main thread stack using the --main-stacksize= flag.
+==6221==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.48 54536
+Start test 1
+0.43 54476
+Test 1 passed
+Start test 2
+0.42 54536
+Test 2 passed
+Start test 3
+==6278== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==6278==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6278==    by 0x1095EE: board_read_from (algo.c:62)
+==6278==    by 0x10A6B6: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==6278==    by 0x10929E: main (algo_tests.c:422)
+==6278== 
+0.43 54536
+Test 3 failed: error, success reading incorrect board
+Start test 4
+0.43 54536
+Test 4 passed
+Start test 5
+0.44 54536
+Test 5 passed
+Start test 6
+==6335== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==6335==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6335==    by 0x1095EE: board_read_from (algo.c:62)
+==6335==    by 0x10A3DE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==6335==    by 0x10929E: main (algo_tests.c:422)
+==6335== 
+0.43 54532
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54532
+Test 7 passed
+Start test 8
+0.43 54536
+Test 8 passed
+Start test 9
+0.43 54536
+Test 9 passed
+Start test 10
+0.44 54532
+Test 10 passed
+Start test 11
+==6430== Invalid read of size 8
+==6430==    at 0x109A98: board_dist (algo.c:192)
+==6430==    by 0x10A313: test_board_Floyd_Warshall_single (algo_tests.c:267)
+==6430==    by 0x10929E: main (algo_tests.c:422)
+==6430==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==6430== 
+==6430== 
+==6430== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==6430==  Access not within mapped region at address 0x0
+==6430==    at 0x109A98: board_dist (algo.c:192)
+==6430==    by 0x10A313: test_board_Floyd_Warshall_single (algo_tests.c:267)
+==6430==    by 0x10929E: main (algo_tests.c:422)
+==6430==  If you believe this happened as a result of a stack
+==6430==  overflow in your program's main thread (unlikely but
+==6430==  possible), you can try to increase the size of the
+==6430==  main thread stack using the --main-stacksize= flag.
+==6430==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.51 54536
+Start test 12
+==6449== Invalid read of size 8
+==6449==    at 0x109A98: board_dist (algo.c:192)
+==6449==    by 0x10A183: test_board_Floyd_Warshall_chain (algo_tests.c:289)
+==6449==    by 0x10929E: main (algo_tests.c:422)
+==6449==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==6449== 
+==6449== 
+==6449== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==6449==  Access not within mapped region at address 0x0
+==6449==    at 0x109A98: board_dist (algo.c:192)
+==6449==    by 0x10A183: test_board_Floyd_Warshall_chain (algo_tests.c:289)
+==6449==    by 0x10929E: main (algo_tests.c:422)
+==6449==  If you believe this happened as a result of a stack
+==6449==  overflow in your program's main thread (unlikely but
+==6449==  possible), you can try to increase the size of the
+==6449==  main thread stack using the --main-stacksize= flag.
+==6449==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.51 54536
+Start test 13
+==6468== Invalid read of size 8
+==6468==    at 0x109A98: board_dist (algo.c:192)
+==6468==    by 0x109FC1: test_board_Floyd_Warshall_square (algo_tests.c:315)
+==6468==    by 0x10929E: main (algo_tests.c:422)
+==6468==  Address 0x18 is not stack'd, malloc'd or (recently) free'd
+==6468== 
+==6468== 
+==6468== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==6468==  Access not within mapped region at address 0x18
+==6468==    at 0x109A98: board_dist (algo.c:192)
+==6468==    by 0x109FC1: test_board_Floyd_Warshall_square (algo_tests.c:315)
+==6468==    by 0x10929E: main (algo_tests.c:422)
+==6468==  If you believe this happened as a result of a stack
+==6468==  overflow in your program's main thread (unlikely but
+==6468==  possible), you can try to increase the size of the
+==6468==  main thread stack using the --main-stacksize= flag.
+==6468==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.51 54532
+Start test 14
+==6487== Invalid read of size 8
+==6487==    at 0x109A98: board_dist (algo.c:192)
+==6487==    by 0x109D16: test_board_Floyd_Warshall_circle (algo_tests.c:342)
+==6487==    by 0x10929E: main (algo_tests.c:422)
+==6487==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==6487== 
+==6487== 
+==6487== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==6487==  Access not within mapped region at address 0x0
+==6487==    at 0x109A98: board_dist (algo.c:192)
+==6487==    by 0x109D16: test_board_Floyd_Warshall_circle (algo_tests.c:342)
+==6487==    by 0x10929E: main (algo_tests.c:422)
+==6487==  If you believe this happened as a result of a stack
+==6487==  overflow in your program's main thread (unlikely but
+==6487==  possible), you can try to increase the size of the
+==6487==  main thread stack using the --main-stacksize= flag.
+==6487==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.51 54536
+Start test 15
+==6506== Invalid read of size 8
+==6506==    at 0x109A98: board_dist (algo.c:192)
+==6506==    by 0x109B83: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==6506==    by 0x10929E: main (algo_tests.c:422)
+==6506==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==6506== 
+==6506== 
+==6506== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==6506==  Access not within mapped region at address 0x0
+==6506==    at 0x109A98: board_dist (algo.c:192)
+==6506==    by 0x109B83: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==6506==    by 0x10929E: main (algo_tests.c:422)
+==6506==  If you believe this happened as a result of a stack
+==6506==  overflow in your program's main thread (unlikely but
+==6506==  possible), you can try to increase the size of the
+==6506==  main thread stack using the --main-stacksize= flag.
+==6506==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.51 54536
+THEO DELAROCHE
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+0.41 54540
+Test 0 passed
+Start test 1
+0.43 54468
+Test 1 passed
+Start test 2
+0.42 54544
+Test 2 passed
+Start test 3
+0.42 54544
+Test 3 passed
+Start test 4
+0.44 54536
+Test 4 passed
+Start test 5
+0.43 54540
+Test 5 passed
+Start test 6
+==6676== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 8
+==6676==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6676==    by 0x10942A: board_Floyd_Warshall.part.0 (algo.c:185)
+==6676==    by 0x1098FE: board_Floyd_Warshall (algo.c:180)
+==6676==    by 0x1098FE: board_read_from (algo.c:105)
+==6676==    by 0x10A46E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==6676==    by 0x10927E: main (algo_tests.c:422)
+==6676== 
+==6676== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 5 of 8
+==6676==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6676==    by 0x10943E: board_Floyd_Warshall.part.0 (algo.c:186)
+==6676==    by 0x1098FE: board_Floyd_Warshall (algo.c:180)
+==6676==    by 0x1098FE: board_read_from (algo.c:105)
+==6676==    by 0x10A46E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==6676==    by 0x10927E: main (algo_tests.c:422)
+==6676== 
+==6676== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 8
+==6676==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6676==    by 0x1097BB: board_read_from (algo.c:78)
+==6676==    by 0x10A46E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==6676==    by 0x10927E: main (algo_tests.c:422)
+==6676== 
+0.43 54540
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54544
+Test 7 passed
+Start test 8
+==6714== 140 (40 direct, 100 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 9
+==6714==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6714==    by 0x10942A: board_Floyd_Warshall.part.0 (algo.c:185)
+==6714==    by 0x1098FE: board_Floyd_Warshall (algo.c:180)
+==6714==    by 0x1098FE: board_read_from (algo.c:105)
+==6714==    by 0x10AC26: test_board_is_valid_move_valid (algo_tests.c:196)
+==6714==    by 0x10927E: main (algo_tests.c:422)
+==6714== 
+==6714== 240 (40 direct, 200 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 9
+==6714==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6714==    by 0x10943E: board_Floyd_Warshall.part.0 (algo.c:186)
+==6714==    by 0x1098FE: board_Floyd_Warshall (algo.c:180)
+==6714==    by 0x1098FE: board_read_from (algo.c:105)
+==6714==    by 0x10AC26: test_board_is_valid_move_valid (algo_tests.c:196)
+==6714==    by 0x10927E: main (algo_tests.c:422)
+==6714== 
+==6714== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 8 of 9
+==6714==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6714==    by 0x1097BB: board_read_from (algo.c:78)
+==6714==    by 0x10AC26: test_board_is_valid_move_valid (algo_tests.c:196)
+==6714==    by 0x10927E: main (algo_tests.c:422)
+==6714== 
+0.43 54544
+Test 8 failed: error, move should be valid
+Start test 9
+0.43 54540
+Test 9 passed
+Start test 10
+0.43 54540
+Test 10 passed
+Start test 11
+0.43 54504
+Test 11 passed
+Start test 12
+0.43 54544
+Test 12 passed
+Start test 13
+==6809== 96 (32 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 9
+==6809==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6809==    by 0x10942A: board_Floyd_Warshall.part.0 (algo.c:185)
+==6809==    by 0x1098FE: board_Floyd_Warshall (algo.c:180)
+==6809==    by 0x1098FE: board_read_from (algo.c:105)
+==6809==    by 0x10A008: test_board_Floyd_Warshall_square (algo_tests.c:312)
+==6809==    by 0x10927E: main (algo_tests.c:422)
+==6809== 
+==6809== 160 (32 direct, 128 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 9
+==6809==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6809==    by 0x10943E: board_Floyd_Warshall.part.0 (algo.c:186)
+==6809==    by 0x1098FE: board_Floyd_Warshall (algo.c:180)
+==6809==    by 0x1098FE: board_read_from (algo.c:105)
+==6809==    by 0x10A008: test_board_Floyd_Warshall_square (algo_tests.c:312)
+==6809==    by 0x10927E: main (algo_tests.c:422)
+==6809== 
+==6809== 224 (32 direct, 192 indirect) bytes in 1 blocks are definitely lost in loss record 8 of 9
+==6809==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6809==    by 0x1097BB: board_read_from (algo.c:78)
+==6809==    by 0x10A008: test_board_Floyd_Warshall_square (algo_tests.c:312)
+==6809==    by 0x10927E: main (algo_tests.c:422)
+==6809== 
+0.43 54540
+Test 13 failed: error, incorrect next vertex
+Start test 14
+0.44 54540
+Test 14 passed
+Start test 15
+==6847== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==6847==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6847==    by 0x10942A: board_Floyd_Warshall.part.0 (algo.c:185)
+==6847==    by 0x1098FE: board_Floyd_Warshall (algo.c:180)
+==6847==    by 0x1098FE: board_read_from (algo.c:105)
+==6847==    by 0x109BD6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==6847==    by 0x10927E: main (algo_tests.c:422)
+==6847== 
+==6847== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==6847==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6847==    by 0x10943E: board_Floyd_Warshall.part.0 (algo.c:186)
+==6847==    by 0x1098FE: board_Floyd_Warshall (algo.c:180)
+==6847==    by 0x1098FE: board_read_from (algo.c:105)
+==6847==    by 0x109BD6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==6847==    by 0x10927E: main (algo_tests.c:422)
+==6847== 
+==6847== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==6847==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6847==    by 0x1097BB: board_read_from (algo.c:78)
+==6847==    by 0x109BD6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==6847==    by 0x10927E: main (algo_tests.c:422)
+==6847== 
+0.52 54544
+Test 15 failed: error, incorrect next vertex
+THOMAS COUTANT
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==6903== Invalid write of size 8
+==6903==    at 0x109458: board_create (algo.c:8)
+==6903==    by 0x10AF1E: test_board_null (algo_tests.c:15)
+==6903==    by 0x1092BE: main (algo_tests.c:422)
+==6903==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==6903== 
+==6903== 
+==6903== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==6903==  Access not within mapped region at address 0x0
+==6903==    at 0x109458: board_create (algo.c:8)
+==6903==    by 0x10AF1E: test_board_null (algo_tests.c:15)
+==6903==    by 0x1092BE: main (algo_tests.c:422)
+==6903==  If you believe this happened as a result of a stack
+==6903==  overflow in your program's main thread (unlikely but
+==6903==  possible), you can try to increase the size of the
+==6903==  main thread stack using the --main-stacksize= flag.
+==6903==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.49 54580
+Start test 1
+0.45 54480
+Test 1 passed
+Start test 2
+Error: invalid or missing number of cops
+0.42 54584
+Test 2 passed
+Start test 3
+Error: invalid or missing number of robbers
+0.43 54584
+Test 3 passed
+Start test 4
+Error: invalid or missing number of edges
+0.43 54580
+Test 4 passed
+Start test 5
+Error: invalid or missing edge on line 0
+0.43 54580
+Test 5 passed
+Start test 6
+==7017== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==7017==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7017==    by 0x109665: board_read_from (algo.c:69)
+==7017==    by 0x10A5DE: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==7017==    by 0x1092BE: main (algo_tests.c:422)
+==7017== 
+0.43 54584
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54580
+Test 7 passed
+Start test 8
+0.43 54580
+Test 8 passed
+Start test 9
+==7074== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==7074==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7074==    by 0x109665: board_read_from (algo.c:69)
+==7074==    by 0x10AC86: test_board_is_valid_move_inplace (algo_tests.c:219)
+==7074==    by 0x1092BE: main (algo_tests.c:422)
+==7074== 
+0.43 54584
+Test 9 failed: error, move should be valid
+Start test 10
+0.43 54584
+Test 10 passed
+Start test 11
+==7112== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==7112==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7112==    by 0x109665: board_read_from (algo.c:69)
+==7112==    by 0x10A4D6: test_board_Floyd_Warshall_single (algo_tests.c:264)
+==7112==    by 0x1092BE: main (algo_tests.c:422)
+==7112== 
+0.43 54580
+Test 11 failed: error, incorrect distance
+Start test 12
+==7131== 152 (24 direct, 128 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==7131==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7131==    by 0x109665: board_read_from (algo.c:69)
+==7131==    by 0x10A343: test_board_Floyd_Warshall_chain (algo_tests.c:286)
+==7131==    by 0x1092BE: main (algo_tests.c:422)
+==7131== 
+0.43 54584
+Test 12 failed: error, incorrect distance
+Start test 13
+==7150== 224 (32 direct, 192 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==7150==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7150==    by 0x109665: board_read_from (algo.c:69)
+==7150==    by 0x10A178: test_board_Floyd_Warshall_square (algo_tests.c:312)
+==7150==    by 0x1092BE: main (algo_tests.c:422)
+==7150== 
+0.43 54584
+Test 13 failed: error, incorrect distance
+Start test 14
+==7169== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==7169==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7169==    by 0x109665: board_read_from (algo.c:69)
+==7169==    by 0x109ED6: test_board_Floyd_Warshall_circle (algo_tests.c:339)
+==7169==    by 0x1092BE: main (algo_tests.c:422)
+==7169== 
+0.43 54584
+Test 14 failed: error, incorrect distance
+Start test 15
+==7188== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==7188==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7188==    by 0x109665: board_read_from (algo.c:69)
+==7188==    by 0x109D46: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==7188==    by 0x1092BE: main (algo_tests.c:422)
+==7188== 
+0.43 54584
+Test 15 failed: error, incorrect distance
+TITOUAN PORNIN
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+Indentation problem, diff length is 309
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+==7244== Invalid read of size 4
+==7244==    at 0x48E2B55: fgets (iofgets.c:47)
+==7244==    by 0x1094E2: fgets (stdio2.h:200)
+==7244==    by 0x1094E2: board_read_from (algo.c:37)
+==7244==    by 0x10AE97: test_board_null (algo_tests.c:16)
+==7244==    by 0x10929E: main (algo_tests.c:422)
+==7244==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==7244== 
+==7244== 
+==7244== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==7244==  Access not within mapped region at address 0x0
+==7244==    at 0x48E2B55: fgets (iofgets.c:47)
+==7244==    by 0x1094E2: fgets (stdio2.h:200)
+==7244==    by 0x1094E2: board_read_from (algo.c:37)
+==7244==    by 0x10AE97: test_board_null (algo_tests.c:16)
+==7244==    by 0x10929E: main (algo_tests.c:422)
+==7244==  If you believe this happened as a result of a stack
+==7244==  overflow in your program's main thread (unlikely but
+==7244==  possible), you can try to increase the size of the
+==7244==  main thread stack using the --main-stacksize= flag.
+==7244==  The main thread stack size used in this run was 8388608.
+timeout: the monitored command dumped core
+Command terminated by signal 11
+0.48 54548
+Start test 1
+0.43 54540
+Test 1 passed
+Start test 2
+0.42 54440
+Test 2 passed
+Start test 3
+0.43 54540
+Test 3 passed
+Start test 4
+0.43 54420
+Test 4 passed
+Start test 5
+0.43 54472
+Test 5 passed
+Start test 6
+==7358== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==7358==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7358==    by 0x10961F: board_read_from (algo.c:57)
+==7358==    by 0x10A54E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==7358==    by 0x10929E: main (algo_tests.c:422)
+==7358== 
+0.43 54544
+Test 6 failed: error, incorrect number of edges
+Start test 7
+0.43 54540
+Test 7 passed
+Start test 8
+0.43 54420
+Test 8 passed
+Start test 9
+0.43 54544
+Test 9 passed
+Start test 10
+0.43 54540
+Test 10 passed
+Start test 11
+==7453== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==7453==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7453==    by 0x10961F: board_read_from (algo.c:57)
+==7453==    by 0x10A446: test_board_Floyd_Warshall_single (algo_tests.c:264)
+==7453==    by 0x10929E: main (algo_tests.c:422)
+==7453== 
+0.43 54544
+Test 11 failed: error, incorrect distance
+Start test 12
+==7472== 152 (24 direct, 128 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==7472==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7472==    by 0x10961F: board_read_from (algo.c:57)
+==7472==    by 0x10A2B3: test_board_Floyd_Warshall_chain (algo_tests.c:286)
+==7472==    by 0x10929E: main (algo_tests.c:422)
+==7472== 
+0.43 54540
+Test 12 failed: error, incorrect distance
+Start test 13
+==7491== 224 (32 direct, 192 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==7491==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7491==    by 0x10961F: board_read_from (algo.c:57)
+==7491==    by 0x10A0E8: test_board_Floyd_Warshall_square (algo_tests.c:312)
+==7491==    by 0x10929E: main (algo_tests.c:422)
+==7491== 
+0.43 54452
+Test 13 failed: error, incorrect distance
+Start test 14
+==7510== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==7510==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7510==    by 0x10961F: board_read_from (algo.c:57)
+==7510==    by 0x109E46: test_board_Floyd_Warshall_circle (algo_tests.c:339)
+==7510==    by 0x10929E: main (algo_tests.c:422)
+==7510== 
+0.43 54368
+Test 14 failed: error, incorrect distance
+Start test 15
+==7529== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==7529==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7529==    by 0x10961F: board_read_from (algo.c:57)
+==7529==    by 0x109CB6: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==7529==    by 0x10929E: main (algo_tests.c:422)
+==7529== 
+0.43 54544
+Test 15 failed: error, incorrect distance
+YOSRI BEN HAMOUDA
+cp: cannot stat '/students/YOSRI BEN HAMOUDA_23952869_assignsubmission_file/algo.c': No such file or directory
+correction
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+0.41 54592
+Test 0 passed
+Start test 1
+0.43 54588
+Test 1 passed
+Start test 2
+Error while parsing number of cops
+0.42 54532
+Test 2 passed
+Start test 3
+Error while parsing number of robbers
+0.43 54588
+Test 3 passed
+Start test 4
+Error while parsing number of edges
+0.43 54592
+Test 4 passed
+Start test 5
+Error while parsing edge
+0.43 54504
+Test 5 passed
+Start test 6
+0.43 54588
+Test 6 passed
+Start test 7
+0.43 54592
+Test 7 passed
+Start test 8
+0.43 54592
+Test 8 passed
+Start test 9
+0.43 54508
+Test 9 passed
+Start test 10
+0.43 54596
+Test 10 passed
+Start test 11
+0.43 54588
+Test 11 passed
+Start test 12
+0.43 54592
+Test 12 passed
+Start test 13
+0.43 54588
+Test 13 passed
+Start test 14
+0.44 54588
+Test 14 passed
+Start test 15
+0.44 54500
+Test 15 passed
+mid
+sed "s/\r//g" -i *.h *.c
+indent -npsl -nut *.h *.c
+No indentation problem
+gcc -std=c99 -Wall -Wextra -pedantic -g -O2 algo.h algo.c algo_tests.c -o algo
+Start test 0
+0.41 54580
+Test 0 passed
+Start test 1
+==7953== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==7953==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7953==    by 0x10985A: board_read_from (algo.c:72)
+==7953==    by 0x10A916: test_board_read_from_valid (algo_tests.c:42)
+==7953==    by 0x10929E: main (algo_tests.c:422)
+==7953== 
+0.43 54580
+Test 1 passed
+Start test 2
+Error while parsing number of cops
+0.43 54584
+Test 2 passed
+Start test 3
+==7991== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==7991==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7991==    by 0x10985A: board_read_from (algo.c:72)
+==7991==    by 0x10A776: test_board_read_from_invalid_robbers (algo_tests.c:86)
+==7991==    by 0x10929E: main (algo_tests.c:422)
+==7991== 
+0.44 54580
+Test 3 failed: error, success reading incorrect board
+Start test 4
+Error while parsing number of edges
+==8010== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==8010==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8010==    by 0x10985A: board_read_from (algo.c:72)
+==8010==    by 0x10A6A6: test_board_read_from_invalid_vertices (algo_tests.c:106)
+==8010==    by 0x10929E: main (algo_tests.c:422)
+==8010== 
+0.43 54584
+Test 4 passed
+Start test 5
+Error while parsing edge
+==8029== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 3
+==8029==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8029==    by 0x10985A: board_read_from (algo.c:72)
+==8029==    by 0x10A5CE: test_board_read_from_invalid_edges (algo_tests.c:126)
+==8029==    by 0x10929E: main (algo_tests.c:422)
+==8029== 
+0.43 54460
+Test 5 passed
+Start test 6
+==8048== 88 (16 direct, 72 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==8048==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8048==    by 0x10985A: board_read_from (algo.c:72)
+==8048==    by 0x10A49E: test_board_read_from_valid_autoedge (algo_tests.c:146)
+==8048==    by 0x10929E: main (algo_tests.c:422)
+==8048== 
+0.43 54580
+Test 6 passed
+Start test 7
+==8067== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 5
+==8067==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8067==    by 0x10985A: board_read_from (algo.c:72)
+==8067==    by 0x10AD66: test_board_is_valid_move_incorrect (algo_tests.c:173)
+==8067==    by 0x10929E: main (algo_tests.c:422)
+==8067== 
+0.43 54580
+Test 7 passed
+Start test 8
+==8086== 285 (40 direct, 245 indirect) bytes in 1 blocks are definitely lost in loss record 5 of 6
+==8086==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8086==    by 0x10985A: board_read_from (algo.c:72)
+==8086==    by 0x10AC56: test_board_is_valid_move_valid (algo_tests.c:196)
+==8086==    by 0x10929E: main (algo_tests.c:422)
+==8086== 
+0.44 54492
+Test 8 passed
+Start test 9
+==8105== 285 (40 direct, 245 indirect) bytes in 1 blocks are definitely lost in loss record 5 of 6
+==8105==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8105==    by 0x10985A: board_read_from (algo.c:72)
+==8105==    by 0x10AB46: test_board_is_valid_move_inplace (algo_tests.c:219)
+==8105==    by 0x10929E: main (algo_tests.c:422)
+==8105== 
+0.43 54580
+Test 9 passed
+Start test 10
+==8124== 285 (40 direct, 245 indirect) bytes in 1 blocks are definitely lost in loss record 5 of 6
+==8124==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8124==    by 0x10985A: board_read_from (algo.c:72)
+==8124==    by 0x10AA36: test_board_is_valid_move_invalid (algo_tests.c:242)
+==8124==    by 0x10929E: main (algo_tests.c:422)
+==8124== 
+0.43 54584
+Test 10 passed
+Start test 11
+==8143== 12 (8 direct, 4 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==8143==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8143==    by 0x10944A: board_Floyd_Warshall.part.0 (algo.c:131)
+==8143==    by 0x109AFF: board_Floyd_Warshall (algo.c:129)
+==8143==    by 0x109AFF: board_dist (algo.c:171)
+==8143==    by 0x10A3D3: test_board_Floyd_Warshall_single (algo_tests.c:267)
+==8143==    by 0x10929E: main (algo_tests.c:422)
+==8143== 
+==8143== 16 (8 direct, 8 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==8143==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8143==    by 0x10945E: board_Floyd_Warshall.part.0 (algo.c:132)
+==8143==    by 0x109AFF: board_Floyd_Warshall (algo.c:129)
+==8143==    by 0x109AFF: board_dist (algo.c:171)
+==8143==    by 0x10A3D3: test_board_Floyd_Warshall_single (algo_tests.c:267)
+==8143==    by 0x10929E: main (algo_tests.c:422)
+==8143== 
+==8143== 40 (8 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==8143==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8143==    by 0x10985A: board_read_from (algo.c:72)
+==8143==    by 0x10A396: test_board_Floyd_Warshall_single (algo_tests.c:264)
+==8143==    by 0x10929E: main (algo_tests.c:422)
+==8143== 
+0.43 54460
+Test 11 passed
+Start test 12
+==8162== 60 (24 direct, 36 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 9
+==8162==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8162==    by 0x10944A: board_Floyd_Warshall.part.0 (algo.c:131)
+==8162==    by 0x109AFF: board_Floyd_Warshall (algo.c:129)
+==8162==    by 0x109AFF: board_dist (algo.c:171)
+==8162==    by 0x10A243: test_board_Floyd_Warshall_chain (algo_tests.c:289)
+==8162==    by 0x10929E: main (algo_tests.c:422)
+==8162== 
+==8162== 96 (24 direct, 72 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 9
+==8162==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8162==    by 0x10945E: board_Floyd_Warshall.part.0 (algo.c:132)
+==8162==    by 0x109AFF: board_Floyd_Warshall (algo.c:129)
+==8162==    by 0x109AFF: board_dist (algo.c:171)
+==8162==    by 0x10A243: test_board_Floyd_Warshall_chain (algo_tests.c:289)
+==8162==    by 0x10929E: main (algo_tests.c:422)
+==8162== 
+==8162== 152 (24 direct, 128 indirect) bytes in 1 blocks are definitely lost in loss record 8 of 9
+==8162==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8162==    by 0x10985A: board_read_from (algo.c:72)
+==8162==    by 0x10A203: test_board_Floyd_Warshall_chain (algo_tests.c:286)
+==8162==    by 0x10929E: main (algo_tests.c:422)
+==8162== 
+0.43 54404
+Test 12 passed
+Start test 13
+==8181== 96 (32 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 9
+==8181==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8181==    by 0x10944A: board_Floyd_Warshall.part.0 (algo.c:131)
+==8181==    by 0x109AFF: board_Floyd_Warshall (algo.c:129)
+==8181==    by 0x109AFF: board_dist (algo.c:171)
+==8181==    by 0x10A081: test_board_Floyd_Warshall_square (algo_tests.c:315)
+==8181==    by 0x10929E: main (algo_tests.c:422)
+==8181== 
+==8181== 160 (32 direct, 128 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 9
+==8181==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8181==    by 0x10945E: board_Floyd_Warshall.part.0 (algo.c:132)
+==8181==    by 0x109AFF: board_Floyd_Warshall (algo.c:129)
+==8181==    by 0x109AFF: board_dist (algo.c:171)
+==8181==    by 0x10A081: test_board_Floyd_Warshall_square (algo_tests.c:315)
+==8181==    by 0x10929E: main (algo_tests.c:422)
+==8181== 
+==8181== 224 (32 direct, 192 indirect) bytes in 1 blocks are definitely lost in loss record 8 of 9
+==8181==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8181==    by 0x10985A: board_read_from (algo.c:72)
+==8181==    by 0x10A038: test_board_Floyd_Warshall_square (algo_tests.c:312)
+==8181==    by 0x10929E: main (algo_tests.c:422)
+==8181== 
+0.43 54580
+Test 13 passed
+Start test 14
+==8200== 140 (40 direct, 100 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 9
+==8200==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8200==    by 0x10944A: board_Floyd_Warshall.part.0 (algo.c:131)
+==8200==    by 0x109AFF: board_Floyd_Warshall (algo.c:129)
+==8200==    by 0x109AFF: board_dist (algo.c:171)
+==8200==    by 0x109DD6: test_board_Floyd_Warshall_circle (algo_tests.c:342)
+==8200==    by 0x10929E: main (algo_tests.c:422)
+==8200== 
+==8200== 240 (40 direct, 200 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 9
+==8200==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8200==    by 0x10945E: board_Floyd_Warshall.part.0 (algo.c:132)
+==8200==    by 0x109AFF: board_Floyd_Warshall (algo.c:129)
+==8200==    by 0x109AFF: board_dist (algo.c:171)
+==8200==    by 0x109DD6: test_board_Floyd_Warshall_circle (algo_tests.c:342)
+==8200==    by 0x10929E: main (algo_tests.c:422)
+==8200== 
+==8200== 280 (40 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 8 of 9
+==8200==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8200==    by 0x10985A: board_read_from (algo.c:72)
+==8200==    by 0x109D96: test_board_Floyd_Warshall_circle (algo_tests.c:339)
+==8200==    by 0x10929E: main (algo_tests.c:422)
+==8200== 
+0.43 54584
+Test 14 passed
+Start test 15
+==8219== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 7
+==8219==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8219==    by 0x10944A: board_Floyd_Warshall.part.0 (algo.c:131)
+==8219==    by 0x109AFF: board_Floyd_Warshall (algo.c:129)
+==8219==    by 0x109AFF: board_dist (algo.c:171)
+==8219==    by 0x109C43: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==8219==    by 0x10929E: main (algo_tests.c:422)
+==8219== 
+==8219== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 7
+==8219==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8219==    by 0x10945E: board_Floyd_Warshall.part.0 (algo.c:132)
+==8219==    by 0x109AFF: board_Floyd_Warshall (algo.c:129)
+==8219==    by 0x109AFF: board_dist (algo.c:171)
+==8219==    by 0x109C43: test_board_Floyd_Warshall_indep (algo_tests.c:372)
+==8219==    by 0x10929E: main (algo_tests.c:422)
+==8219== 
+==8219== 80 (16 direct, 64 indirect) bytes in 1 blocks are definitely lost in loss record 6 of 7
+==8219==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8219==    by 0x10985A: board_read_from (algo.c:72)
+==8219==    by 0x109C06: test_board_Floyd_Warshall_indep (algo_tests.c:369)
+==8219==    by 0x10929E: main (algo_tests.c:422)
+==8219== 
+0.43 54584
+Test 15 passed
