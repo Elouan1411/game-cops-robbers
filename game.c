@@ -1,4 +1,3 @@
-
 #include "algo.h"
 
 #include <limits.h>
@@ -289,7 +288,7 @@ static void move_cops(board *b, board_vertex **cops, size_t ncops,
 	int *num_real_cops = calloc(ncops, sizeof(int));
 	size_t n_real_cops = 0;
 	for (size_t i = 0; i < ncops; i++) { // TODO: il faudrait que le dernier
-										 // prenne completement un autre chemin
+		// prenne completement un autre chemin
 		if (cops[i]->degree > 0) {
 			num_real_cops[i] = i;
 			real_cops[n_real_cops++] = cops[i];
@@ -414,8 +413,8 @@ static board_vertex *get_2nd_best_neighbor(board *b, board_vertex *start,
 		8; // importance de la distance entre le voisin et la cible
 	const int W_SAME_PATH =
 		7; // importance que le nombre de sommet en commun pour faire le trajet
-		   // avec un autre gendarme soit faible (pour ne pas prendre les mêmes
-		   // chemins)
+	// avec un autre gendarme soit faible (pour ne pas prendre les mêmes
+	// chemins)
 
 	// Sinon on choisit la case voisine (ou la case start) où la distance avec
 	// le gendarme est la plus proche
@@ -584,11 +583,11 @@ static int score_move_robber_for_one_neighbor(board *b, board_vertex *v,
 											  size_t ncops) {
 	/* Poids (peut etre a ajuster) */
 	const int W_DIST_MAX =
-		4; // distance_maximale (Éloignement des autres gendarmes déjà placés)
+		10; // distance_maximale (Éloignement des autres gendarmes déjà placés)
 	const int W_DEGREE = 1;	  // mobilité
-	const int W_DIST_MOY = 1; // Moyenne des distances vers tous les sommets ()
+	const int W_DIST_MOY = 5; // Moyenne des distances vers tous les sommets ()
 	const int PENALITY =
-		15; // si case deja occupée par un voleur (but = dispersé)
+		13; // si case deja occupée par un voleur (but = dispersé)
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
@@ -608,8 +607,8 @@ static int score_pos_cops_for_one_summit(board *b, board_vertex *v,
 	const int W_DIST_MAX =
 		1; // distance_maximale (Éloignement des autres gendarmes déjà placés)
 
-	const int W_DEGREE = 2;	  // mobilité
-	const int W_DIST_MOY = 8; // Moyenne des distances vers tous les sommets
+	const int W_DEGREE = 8;	  // mobilité
+	const int W_DIST_MOY = 6; // Moyenne des distances vers tous les sommets
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
@@ -634,10 +633,10 @@ static int score_pos_robber_for_one_summit(board *b, board_vertex *v,
 										   board_vertex **robbers,
 										   size_t nrobbers) {
 	/* Poids (peut etre a ajuster) */
-	const int W_DIST_MIN = 3; // distance minimale (le plus important)
-	const int W_DEGREE = 5;	  // mobilité / échappatoires
-	const int W_DIST_MOY = 2; // distance moyenne (utile si plusieurs gendarmes)
-	const int W_DIST_MOY_WITH_ROBBERS = 6; // dispersé les gendarmes
+	const int W_DIST_MIN = 10; // distance minimale (le plus important)
+	const int W_DEGREE = 5;	   // mobilité / échappatoires
+	const int W_DIST_MOY = 5; // distance moyenne (utile si plusieurs gendarmes)
+	const int W_DIST_MOY_WITH_ROBBERS = 7; // dispersé les gendarmes
 
 	int dist_min = min_dist_between_summit_and_all_cops(b, v, cops, ncops);
 	int degree = v->degree;
